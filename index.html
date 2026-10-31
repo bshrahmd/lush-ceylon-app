@@ -73,6 +73,10 @@
     .ann-bar { background: linear-gradient(90deg, #16422C, #246342, #16422C); border-bottom: 1px solid rgba(82, 183, 136, 0.3); font-size: 12px; padding: 8px 0; color: #E8F8EE; position: relative; z-index: 201; }
     .ann-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
     .ann-bar span { margin-right: 18px; }
+    .ann-right { display: flex; align-items: center; gap: 14px; }
+    .ann-socials { display: inline-flex; align-items: center; gap: 10px; }
+    .ann-socials a { color: #D8F3DC; font-size: 12px; opacity: 0.88; transition: color 0.2s ease, transform 0.2s ease, opacity 0.2s ease; display: inline-flex; align-items: center; justify-content: center; }
+    .ann-socials a:hover { color: #F7E7A1; opacity: 1; transform: translateY(-1px); }
 
     /* ---- HEADER ---- */
     header { position: sticky; top: 0; z-index: 200; background: rgba(243, 250, 246, 0.86); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); box-shadow: 0 4px 20px rgba(20, 60, 40, 0.05); }
@@ -393,10 +397,12 @@
     /* ---- FEATURED SECTION ---- */
     .feat-sec { padding: 60px 0; border-top: 1px solid var(--border); position: relative; z-index: 2; }
     .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .feat-card { border-radius: 14px; overflow: hidden; position: relative; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(20, 60, 40, 0.08); }
-    .feat-card img { width: 100%; height: 220px; object-fit: cover; }
-    .feat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 38, 24, .88), rgba(12, 38, 24, .15)); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
-    .feat-overlay h4 { font-family: var(--font-h); font-size: 19px; color: #fff; margin-bottom: 8px; }
+    .feat-card { display: block; text-decoration: none; border-radius: 14px; overflow: hidden; position: relative; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(20, 60, 40, 0.08); transition: transform .35s ease, box-shadow .35s ease; }
+    .feat-card:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(20, 60, 40, 0.16); }
+    .feat-card img { width: 100%; height: 220px; object-fit: cover; display: block; transition: transform .55s ease; }
+    .feat-card:hover img { transform: scale(1.06); }
+    .feat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(12, 38, 24, .82), rgba(12, 38, 24, .08)); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
+    .feat-overlay h4 { font-family: var(--font-h); font-size: 22px; color: #fff; margin: 0; }
 
     /* ---- FOOTER ---- */
     footer { background: linear-gradient(180deg, #E2F2E8 0%, #D3EADC 100%); border-top: 1px solid var(--border); padding: 55px 0 26px; position: relative; z-index: 2; }
@@ -406,6 +412,26 @@
     .foot-col li { margin-bottom: 8px; }
     .foot-col a { color: var(--text-muted); font-size: 12.5px; transition: color .3s; }
     .foot-col a:hover { color: var(--accent-pink); }
+    .foot-follow { display: flex; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .foot-follow-label { font-family: var(--font-h); font-size: 13px; font-weight: 600; color: var(--accent-gold-warm); letter-spacing: 0.6px; }
+    .foot-social-btns { display: flex; align-items: center; gap: 10px; }
+    .social-gold-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(184, 134, 11, 0.08));
+      border: 1.5px solid rgba(184, 134, 11, 0.45);
+      color: var(--accent-gold-warm);
+      font-size: 15px;
+      box-shadow: 0 3px 10px rgba(184, 134, 11, 0.12);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .social-gold-btn:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #D4AF37, #B8860B);
+      border-color: #B8860B;
+      color: #FFFFFF;
+      box-shadow: 0 7px 18px rgba(184, 134, 11, 0.32);
+    }
     .foot-copy { text-align: center; padding-top: 20px; border-top: 1px solid rgba(45, 106, 79, .15); color: var(--text-muted); font-size: 11.5px; }
 
     /* ---- RESPONSIVE ---- */
@@ -423,6 +449,7 @@
     @media(max-width: 600px) {
       .hero-title { font-size: 32px; }
       .cart-drawer { width: 100%; right: -100%; }
+      footer { padding-bottom: 76px; }
     }
 
     /* ===== ANIMATIONS & WIND PHYSICS ===== */
@@ -433,10 +460,23 @@
     @keyframes scaleIn    { from{opacity:0;transform:scale(0.85)}       to{opacity:1;transform:scale(1)} }
     @keyframes float      { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-10px) rotate(0.6deg)} }
     @keyframes shimmer    { 0%{background-position:-200% center} 100%{background-position:200% center} }
-    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 0 0 rgba(30, 126, 78, 0.35)} 50%{box-shadow:0 0 0 10px rgba(30, 126, 78, 0)} }
-    @keyframes pulse-gold { 0%,100%{box-shadow:0 12px 30px rgba(45, 106, 79, 0.18)} 50%{box-shadow:0 16px 42px rgba(45, 106, 79, 0.35)} }
+    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 0 0 rgba(30, 126, 78, 0.25)} 50%{box-shadow:0 0 0 7px rgba(30, 126, 78, 0)} }
+    @keyframes pulse-gold { 0%,100%{box-shadow:0 12px 30px rgba(45, 106, 79, 0.14)} 50%{box-shadow:0 15px 38px rgba(45, 106, 79, 0.26)} }
     @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
     @keyframes slideInBadge { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+    @keyframes cartBounce {
+      0%, 100% { transform: scale(1) translateY(0); }
+      30%      { transform: scale(1.16) translateY(-4px); }
+      60%      { transform: scale(0.94) translateY(1px); }
+      80%      { transform: scale(1.04) translateY(-1px); }
+    }
+    @keyframes badgePop {
+      0%, 100% { transform: scale(1); }
+      45%      { transform: scale(1.45); }
+      75%      { transform: scale(0.9); }
+    }
+    .cart-icon-btn.cart-bounce { animation: cartBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .cart-cnt.badge-pop { animation: badgePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
     @keyframes gentleWindSway {
       0%   { transform: rotate(0deg) skewX(0deg) scale(1); }
       35%  { transform: rotate(3.2deg) skewX(2.5deg) scale(1.01); }
@@ -498,6 +538,48 @@
     #back-top.show { opacity:1; transform:translateY(0); }
     #back-top:hover { transform:translateY(-4px) scale(1.1); box-shadow:0 8px 28px rgba(30, 126, 78, 0.55); }
 
+    /* --- Floating WhatsApp Button --- */
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 4px 18px rgba(37, 211, 102, 0.38), 0 0 0 0 rgba(37, 211, 102, 0.42); }
+      50%      { box-shadow: 0 6px 22px rgba(37, 211, 102, 0.48), 0 0 0 10px rgba(37, 211, 102, 0); }
+    }
+    #whatsapp-float {
+      position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border-radius: 50%; color: #fff; font-size: 25px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; cursor: pointer;
+      animation: waPulse 2.8s ease-in-out infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    #whatsapp-float:hover {
+      transform: translateY(-4px) scale(1.08);
+    }
+    #whatsapp-float .wa-tooltip {
+      position: absolute; left: calc(100% + 12px); top: 50%;
+      transform: translateY(-50%) translateX(-6px);
+      background: #122E20; color: #fff;
+      font-size: 12px; font-weight: 600; white-space: nowrap;
+      padding: 6px 12px; border-radius: 20px;
+      box-shadow: 0 4px 14px rgba(18, 46, 32, 0.22);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    }
+    #whatsapp-float .wa-tooltip::before {
+      content: ''; position: absolute; right: 100%; top: 50%;
+      transform: translateY(-50%);
+      border: 5px solid transparent; border-right-color: #122E20;
+    }
+    #whatsapp-float:hover .wa-tooltip,
+    #whatsapp-float:focus-visible .wa-tooltip {
+      opacity: 1; visibility: visible; transform: translateY(-50%) translateX(0);
+    }
+    @media (max-width: 600px) {
+      #whatsapp-float { bottom: 16px; left: 16px; width: 42px; height: 42px; font-size: 21px; }
+      #whatsapp-float .wa-tooltip { display: none; }
+      #back-top { bottom: 16px; right: 16px; width: 40px; height: 40px; font-size: 16px; }
+    }
+
     /* --- Nav glassmorphism on scroll --- */
     .nav-scrolled {
       background:rgba(243, 250, 246, 0.94) !important;
@@ -519,7 +601,10 @@
     .hero-animate-sub   { animation:fadeInUp 0.8s ease both; animation-delay:0.65s; }
     .hero-animate-tags  { animation:fadeInUp 0.7s ease both; animation-delay:0.85s; }
     .hero-animate-btns  { animation:fadeInUp 0.7s ease both; animation-delay:1.05s; }
-    .hero-animate-img   { animation:scaleIn 0.9s ease both, float 5.5s ease-in-out 1.5s infinite; animation-delay:0.5s; }
+    .hero-animate-img   {
+      animation: scaleIn 0.9s ease both, float 5.5s ease-in-out infinite;
+      animation-delay: 0.5s, 1.5s;
+    }
 
     /* --- Shimmer Botanical Text --- */
     .shimmer-text {
@@ -532,7 +617,7 @@
 
     /* --- Product Cards --- */
     .prod-card {
-      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.3s ease !important;
+      transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.3s ease !important;
       will-change:transform;
     }
     .prod-card:hover {
@@ -558,10 +643,7 @@
     /* --- Category Pills --- */
     .cat-pill { transition:all 0.25s cubic-bezier(0.16,1,0.3,1) !important; }
     .cat-pill:hover { transform:translateY(-3px) scale(1.05) !important; }
-    .cat-pill.active { animation:pulse-glow 2.2s infinite; }
-
-    /* --- Badges --- */
-    .badge-pink { animation:pulse-glow 2.5s ease-in-out infinite; }
+    .cat-pill.active { animation:pulse-glow 3s ease-in-out infinite; }
 
     /* --- Buttons --- */
     .btn { position:relative; overflow:hidden; }
@@ -573,7 +655,7 @@
     .btn:active::after { opacity:1; transform:scale(2.5); transition:0s; }
 
     /* --- Video Section Glow --- */
-    .shop-tour-video-wrap { animation:pulse-gold 3s ease-in-out infinite; }
+    .shop-tour-video-wrap { animation:pulse-gold 5s ease-in-out infinite; }
     .location-card {
       transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
     }
@@ -591,6 +673,34 @@
       transition:width 0.8s ease;
     }
     .reveal.visible .sec-title-accent { width:80px; }
+
+    /* --- Reduced Motion --- */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-animate-img,
+      .shimmer-text,
+      .cat-pill.active,
+      .shop-tour-video-wrap,
+      #scroll-progress,
+      .sunlight-rays,
+      .canopy-branch,
+      .wind-ribbon-banner i,
+      #whatsapp-float {
+        animation: none !important;
+      }
+      .reveal,
+      .reveal.reveal-left,
+      .reveal.reveal-right,
+      .reveal.reveal-scale {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .prod-card:hover,
+      .cat-pill:hover,
+      .prod-card:hover .prod-img-wrap img {
+        transform: none !important;
+      }
+    }
 
     /* ===== SHOP TOUR VIDEO SECTION ===== */
     .shop-tour-sec {
@@ -673,11 +783,851 @@
       .shop-tour-grid { grid-template-columns: 1fr; }
       .shop-tour-info h2 { font-size: 28px; }
     }
+
+    /* ===== NAV: CATEGORY DROPDOWN, ACTIVE STATE, MOBILE QUICK LINKS ===== */
+    nav a.nav-active { color: var(--accent-pink); font-weight: 700; }
+    nav a.nav-active::after { width: 100%; }
+    .nav-dd { position: relative; }
+    .nav-dd-menu {
+      position: absolute; top: 100%; left: -18px; min-width: 260px; margin-top: 14px;
+      background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 8px;
+      box-shadow: 0 18px 40px rgba(20, 60, 40, 0.14);
+      opacity: 0; visibility: hidden; transform: translateY(8px); transition: all .25s ease; z-index: 300;
+    }
+    .nav-dd-menu::before { content: ''; position: absolute; left: 0; right: 0; top: -16px; height: 16px; }
+    .nav-dd:hover .nav-dd-menu, .nav-dd:focus-within .nav-dd-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dd-menu a {
+      display: flex; justify-content: space-between; align-items: center; gap: 10px;
+      padding: 8px 10px; border-radius: 8px; text-transform: none; letter-spacing: 0;
+      font-size: 13px; color: var(--text-main);
+    }
+    .nav-dd-menu a::after { display: none; }
+    .nav-dd-menu a:hover { background: #EDF8F2; color: #145A38; }
+    .nav-dd-menu a i { width: 18px; color: var(--accent-pink); }
+    .nav-dd-menu em { font-style: normal; font-size: 11px; color: var(--text-muted); background: #F0F9F4; padding: 1px 8px; border-radius: 10px; }
+    .nav-dd-menu .dd-all { justify-content: center; margin-top: 4px; border-top: 1px solid var(--border); border-radius: 0 0 8px 8px; font-weight: 600; color: #145A38; }
+    .mobile-quick { display: none; gap: 8px; overflow-x: auto; padding: 0 16px 10px; scrollbar-width: none; }
+    .mobile-quick::-webkit-scrollbar { display: none; }
+    .mobile-quick a { flex-shrink: 0; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 20px; background: #fff; border: 1px solid var(--border); color: #145A38; }
+    .mobile-quick a.nav-active { background: #1E7E4E; color: #fff; border-color: #1E7E4E; }
+    @media(max-width: 900px) { .mobile-quick { display: flex; } }
+    .cat-strip-link { display: inline-flex; align-items: center; gap: 5px; margin-left: 14px; color: #145A38; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Product card meta (category + brand links) */
+    .prod-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+    .prod-meta .prod-cat { margin-bottom: 0; }
+    .prod-meta a:hover { text-decoration: underline; }
+    .prod-brand { font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--accent-gold-warm); }
+
+    /* ===== CATALOG PAGES (Categories / Brands) ===== */
+    .page-view { display: none; position: relative; z-index: 2; padding: 34px 0 80px; min-height: 70vh; }
+    .page-view.active { display: block; animation: fadeInUp .6s cubic-bezier(.16,1,.3,1) both; }
+    .crumbs { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .crumbs a { color: #145A38; font-weight: 600; }
+    .crumbs a:hover { text-decoration: underline; }
+    .crumbs i { font-size: 9px; opacity: .6; }
+    .page-hero { text-align: center; margin-bottom: 30px; }
+    .page-hero h2 { font-family: var(--font-h); font-size: 40px; color: #0F2E1E; margin: 10px 0 6px; line-height: 1.15; }
+    .page-hero h2 small { font-size: .6em; font-style: italic; opacity: .85; }
+    .page-hero p { color: var(--text-muted); font-size: 14px; }
+    .cat-hero {
+      position: relative; border-radius: 18px; overflow: hidden; padding: 48px 24px; color: #fff;
+      background: linear-gradient(120deg, rgba(10,45,28,.9), rgba(30,126,78,.55)), var(--hero-img) center/cover;
+      box-shadow: 0 16px 40px rgba(20,60,40,.18);
+    }
+    .cat-hero h2 { color: #fff; }
+    .cat-hero .badge { background: rgba(255,255,255,.92); color: #145A38; border-color: #fff; animation: none; }
+    .gi-welcome, .gi-hint { max-width: 92vw; flex-wrap: wrap; justify-content: center; }
+    .cat-hero p { color: rgba(255,255,255,.88); }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 22px; }
+    .cat-card {
+      position: relative; display: block; border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3.3;
+      border: 1px solid var(--border); background: #fff; box-shadow: 0 8px 24px rgba(20,60,40,.08);
+      transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s;
+    }
+    .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+    .cat-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(10,40,25,.88) 100%); }
+    .cat-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(30,126,78,.2); }
+    .cat-card:hover img { transform: scale(1.08); }
+    .cat-card-info { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 56px 18px 18px; z-index: 2; color: #fff; }
+    .cat-card-info i { font-size: 18px; color: #B7E4C7; display: block; margin-bottom: 6px; }
+    .cat-card-info h3 { font-family: var(--font-h); font-size: 21px; line-height: 1.2; margin-bottom: 4px; }
+    .cat-card-info span { font-size: 12px; opacity: .85; line-height: 1.4; display: block; }
+    .cat-card-go {
+      position: absolute; right: 16px; bottom: 18px; z-index: 2; width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,.95); color: #145A38; display: flex; align-items: center; justify-content: center;
+      transition: transform .3s;
+    }
+    .cat-card:hover .cat-card-go { transform: translateX(4px); }
+    .brand-cta {
+      margin-top: 40px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap;
+      background: linear-gradient(135deg, #16422C, #246342); color: #E8F8EE; border-radius: 16px; padding: 24px 28px;
+    }
+    .brand-cta h3 { font-family: var(--font-h); font-size: 22px; color: #fff; }
+    .brand-cta p { font-size: 13px; opacity: .85; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+    .chip-row.scroll { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+    .filter-lbl { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; white-space: nowrap; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0;
+      padding: 7px 14px; border-radius: 30px; background: #F0F9F4; border: 1px solid var(--border);
+      font-size: 12px; font-weight: 500; color: var(--text-main); transition: all .2s;
+    }
+    .chip i { color: var(--accent-pink); font-size: 12px; }
+    .chip em { font-style: normal; font-size: 10px; font-weight: 700; background: rgba(45,106,79,.12); padding: 1px 7px; border-radius: 10px; }
+    .chip:hover, .chip.active { background: linear-gradient(135deg, #1E7E4E, #2D6A4F); color: #fff; border-color: #1E7E4E; }
+    .chip:hover i, .chip.active i { color: #D8F3DC; }
+    .chip:hover em, .chip.active em { background: rgba(255,255,255,.22); }
+    .page-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin: 18px 0; padding-top: 14px; border-top: 1px solid var(--border); }
+    .result-count { font-size: 13px; color: var(--text-muted); }
+    .sort-wrap { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+    .sort-sel { background: #fff; border: 1px solid var(--border); padding: 7px 10px; border-radius: 8px; font-family: var(--font-b); font-size: 12px; color: var(--text-main); cursor: pointer; }
+    .empty-note { grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px; }
+    .empty-page { text-align: center; padding: 70px 20px; }
+    .empty-page i { font-size: 46px; color: var(--accent-leaf); margin-bottom: 14px; }
+    .empty-page h3 { font-family: var(--font-h); font-size: 26px; margin-bottom: 18px; }
+    /* Brand directory */
+    .brand-search { max-width: 420px; margin: 0 auto 18px; position: relative; }
+    .brand-search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    .brand-search input { width: 100%; padding: 11px 14px 11px 38px; border-radius: 30px; border: 1px solid var(--border); background: #fff; font-family: var(--font-b); font-size: 14px; outline: none; }
+    .brand-search input:focus { border-color: var(--accent-leaf); box-shadow: 0 0 0 3px rgba(82,183,136,.18); }
+    .az-bar {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-bottom: 30px; padding: 10px;
+      position: sticky; top: 80px; z-index: 5; background: rgba(243,250,246,.94); backdrop-filter: blur(10px);
+      border: 1px solid var(--border); border-radius: 12px;
+    }
+    .az-bar button, .az-bar span { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 700; font-size: 13px; font-family: var(--font-b); }
+    .az-bar button { background: #fff; color: #145A38; border: 1px solid var(--border); cursor: pointer; transition: all .2s; }
+    .az-bar button:hover { background: #1E7E4E; color: #fff; }
+    .az-bar span { color: rgba(74,107,91,.3); }
+    .brand-group { margin-bottom: 28px; scroll-margin-top: 150px; }
+    .brand-letter { font-family: var(--font-h); font-size: 30px; color: #1E7E4E; border-bottom: 2px solid var(--border); margin-bottom: 14px; padding-bottom: 4px; }
+    .brand-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .brand-tile { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.94); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; transition: all .25s; }
+    .brand-tile:hover { border-color: var(--accent-leaf); transform: translateY(-3px); box-shadow: 0 10px 24px rgba(30,126,78,.12); }
+    .brand-tile > i { margin-left: auto; color: var(--text-muted); font-size: 11px; }
+    .brand-tile-txt strong { display: block; font-size: 14px; color: #0F2E1E; }
+    .brand-tile-txt small { color: var(--text-muted); font-size: 11px; }
+    .brand-mono {
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1E7E4E, #52B788); color: #fff; font-family: var(--font-h); font-weight: 700; font-size: 16px;
+    }
+    .brand-mono.lg { width: 84px; height: 84px; font-size: 30px; border-radius: 18px; box-shadow: 0 10px 24px rgba(30,126,78,.25); }
+    .brand-hero {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; padding: 24px;
+      background: rgba(255,255,255,.9); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 10px 30px rgba(20,60,40,.07);
+    }
+    .brand-hero-txt h2 { font-family: var(--font-h); font-size: 34px; color: #0F2E1E; margin: 6px 0 2px; }
+    .brand-hero-txt h2 small { font-size: .55em; font-style: italic; color: var(--text-muted); }
+    .brand-hero-txt p { font-size: 13px; color: var(--text-muted); }
+    .brand-hero-nav { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    @media(max-width: 600px) {
+      .page-hero h2 { font-size: 30px; }
+      .brand-hero-nav { margin-left: 0; }
+      .az-bar { top: 110px; }
+    }
+
+    /* ===== FULL-SCREEN BLACK LUSH WATERMARK GIFT WRAP & REALISTIC RIBBON UNTIE ===== */
+    body.gift-lock { overflow: hidden; }
+    body.gift-lock .hero-animate-badge, body.gift-lock .hero-animate-title, body.gift-lock .hero-animate-sub,
+    body.gift-lock .hero-animate-tags, body.gift-lock .hero-animate-btns, body.gift-lock .hero-animate-img { animation-play-state: paused; }
+    body.gift-revealing #storeView, body.gift-revealing header { animation: giSiteIn 1.35s cubic-bezier(.16,1,.3,1) both; }
+
+    #giftIntro {
+      position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center;
+      overflow: hidden; cursor: pointer; outline: none; font-family: var(--font-b); user-select: none;
+      perspective: 1400px;
+    }
+    #giftIntro.active { display: flex; }
+
+    /* Left & right black printed wrapping-paper panels */
+    .gi-door {
+      position: absolute; top: 0; bottom: 0; width: 50.15%; overflow: hidden; z-index: 1;
+      transition: transform 1.35s cubic-bezier(.72,0,.18,1), box-shadow 1.35s ease;
+      transform-style: preserve-3d;
+    }
+    .gi-door.l { left: 0; transform-origin: left center; box-shadow: 12px 0 44px rgba(0,0,0,.85); }
+    .gi-door.r { right: 0; transform-origin: right center; box-shadow: -12px 0 44px rgba(0,0,0,.85); }
+    .gi-door.l::after, .gi-door.r::after { content: ''; position: absolute; top: 0; bottom: 0; width: 2px; z-index: 4; }
+    .gi-door.l::after { right: 0; background: linear-gradient(180deg, rgba(212,175,55,.25), rgba(255,242,184,.75), rgba(212,175,55,.25)); }
+    .gi-door.r::after { left: 0; background: linear-gradient(180deg, rgba(212,175,55,.25), rgba(255,242,184,.75), rgba(212,175,55,.25)); }
+
+    /* Luxury matte-black wrapping paper with subtle weave & diagonal side-view LUSH logo watermark print */
+    .gi-paper {
+      position: absolute; top: 0; bottom: 0; width: 100vw;
+      background-color: #070708;
+      background-image:
+        radial-gradient(ellipse at 50% 50%, rgba(28,24,18,.55) 0%, rgba(4,4,5,.96) 75%),
+        repeating-linear-gradient(45deg, rgba(212,175,55,.028) 0 1px, transparent 1px 18px),
+        repeating-linear-gradient(-45deg, rgba(212,175,55,.028) 0 1px, transparent 1px 18px);
+      overflow: hidden;
+    }
+    .gi-door.l .gi-paper { left: 0; }
+    .gi-door.r .gi-paper { right: 0; }
+
+    /* Diagonal side-view repeating LUSH watermark pattern printed across the black wrapping paper */
+    .gi-wm-sheet {
+      position: absolute; left: -30%; top: -35%; width: 160%; height: 170%;
+      transform: rotate(-22deg) skewX(-6deg);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      grid-auto-rows: 165px;
+      gap: 28px 36px;
+      align-items: center; justify-items: center;
+      pointer-events: none;
+      opacity: .19;
+    }
+    .gi-wm-tile {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 10px 16px; border-radius: 10px;
+      border: 1px solid rgba(212,175,55,.22);
+      background: rgba(255,255,255,.012);
+      box-shadow: inset 0 0 18px rgba(212,175,55,.05);
+    }
+    .gi-wm-tile:nth-child(even) { transform: translateX(48px) scale(.94); opacity: .78; }
+    .gi-wm-tile img {
+      width: 148px; height: auto; display: block;
+      clip-path: inset(13% 9% 13% 9%);
+      filter: sepia(.35) saturate(1.6) brightness(1.05) contrast(1.15);
+      mix-blend-mode: screen;
+    }
+
+    /* Subtle gold foil border frame on the black wrapping paper */
+    .gi-paper::after {
+      content: ''; position: absolute; inset: 22px; pointer-events: none; z-index: 2;
+      border: 1px solid rgba(212,175,55,.34); border-radius: 14px;
+      box-shadow: inset 0 0 0 5px rgba(212,175,55,.07);
+    }
+
+    .gi-vignette {
+      position: absolute; inset: 0; pointer-events: none; z-index: 2;
+      background:
+        radial-gradient(ellipse at center, rgba(212,175,55,.14) 0%, transparent 46%, rgba(0,0,0,.78) 100%),
+        linear-gradient(115deg, rgba(255,255,255,.05) 0%, transparent 36%, transparent 64%, rgba(0,0,0,.5) 100%);
+      transition: opacity .6s;
+    }
+    .gi-sparkles { position: absolute; inset: 0; pointer-events: none; z-index: 2; transition: opacity .5s; }
+    .gi-sparkles span { position: absolute; color: #F7E7A1; opacity: 0; animation: giTwinkle 3.2s ease-in-out infinite; text-shadow: 0 0 8px rgba(247,231,161,.85); }
+
+    /* Full-screen crossed satin ribbons with realistic weave, stitched selvedge & specular sheen */
+    .gi-screen-rib-h, .gi-screen-rib-v { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+    .gi-screen-rib-h i {
+      position: absolute; top: 50%; height: clamp(56px, 7.6vmin, 80px); width: 50.8%;
+      transform: translateY(-50%);
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 3px),
+        linear-gradient(180deg, #5A3E08 0%, #A97B1A 10%, #E0B84C 24%, #FFF6CE 48%, #E6C155 68%, #A97B1A 88%, #543906 100%);
+      box-shadow: 0 14px 34px rgba(0,0,0,.78), 0 3px 8px rgba(0,0,0,.55), inset 0 2px 0 rgba(255,255,255,.75), inset 0 -2px 0 rgba(90,62,8,.9);
+    }
+    .gi-screen-rib-h i::after {
+      content: ''; position: absolute; left: 0; right: 0; top: 6px; bottom: 6px;
+      border-top: 1px dashed rgba(90,62,8,.62); border-bottom: 1px dashed rgba(90,62,8,.62);
+    }
+    .gi-screen-rib-h .l { left: 0; transform-origin: left center; }
+    .gi-screen-rib-h .r { right: 0; transform-origin: right center; }
+
+    .gi-screen-rib-v i {
+      position: absolute; left: 50%; width: clamp(56px, 7.6vmin, 80px); height: 50.8%;
+      transform: translateX(-50%);
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 3px),
+        linear-gradient(90deg, #5A3E08 0%, #A97B1A 10%, #E0B84C 24%, #FFF6CE 48%, #E6C155 68%, #A97B1A 88%, #543906 100%);
+      box-shadow: 14px 0 34px rgba(0,0,0,.78), -4px 0 12px rgba(0,0,0,.55), inset 2px 0 0 rgba(255,255,255,.75), inset -2px 0 0 rgba(90,62,8,.9);
+    }
+    .gi-screen-rib-v i::after {
+      content: ''; position: absolute; top: 0; bottom: 0; left: 6px; right: 6px;
+      border-left: 1px dashed rgba(90,62,8,.62); border-right: 1px dashed rgba(90,62,8,.62);
+    }
+    .gi-screen-rib-v .t { top: 0; transform-origin: center top; }
+    .gi-screen-rib-v .b { bottom: 0; transform-origin: center bottom; }
+
+    /* Center stage: realistic multi-layered satin bow + LUSH seal sticker */
+    .gi-stage {
+      position: relative; z-index: 5; width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+      text-align: center; padding: clamp(24px, 5.5vh, 54px) 20px; pointer-events: none;
+    }
+    .gi-welcome {
+      font-family: var(--font-h); font-style: italic; font-size: clamp(16px, 2.4vw, 23px); color: #FFF3C4;
+      letter-spacing: 1px; padding: 10px 26px; border-radius: 40px;
+      background: rgba(10,10,12,.86); border: 1px solid rgba(212,175,55,.58);
+      box-shadow: 0 10px 30px rgba(0,0,0,.75); backdrop-filter: blur(8px);
+      animation: fadeInDown .9s ease both .2s; transition: opacity .4s, transform .4s;
+      max-width: 92vw;
+    }
+    .gi-hint {
+      font-size: clamp(13px, 1.8vw, 15px); color: #FFF8DC; font-weight: 600; letter-spacing: .6px;
+      display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 9px;
+      padding: 12px 26px; border-radius: 40px; max-width: 92vw;
+      background: rgba(10,10,12,.88); border: 1.5px solid rgba(212,175,55,.72);
+      box-shadow: 0 12px 34px rgba(0,0,0,.8); backdrop-filter: blur(8px);
+      animation: giHint 2s ease-in-out infinite; transition: opacity .4s, transform .4s;
+    }
+    .gi-hint i { color: #F7E7A1; font-size: 16px; }
+    .gi-skip {
+      position: absolute; right: 22px; bottom: 22px; z-index: 6; cursor: pointer;
+      background: rgba(12,12,14,.85); color: #F7E7A1; border: 1px solid rgba(212,175,55,.55);
+      padding: 8px 16px; border-radius: 30px; font-family: var(--font-b); font-size: 12px; font-weight: 600;
+      transition: opacity .4s, background .2s; backdrop-filter: blur(6px);
+    }
+    .gi-skip:hover { background: rgba(24,24,28,.98); }
+
+    .gi-centerpiece {
+      position: absolute; left: 50%; top: 50%; width: 42em; height: 38em;
+      transform: translate(-50%, -50%);
+      font-size: min(11px, 2.35vw, 1.65vh);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: auto;
+    }
+    .gi-bow {
+      position: absolute; left: 50%; top: 50%; width: 42em; height: 32em; z-index: 5;
+      transform: translate(-50%, -52%); overflow: visible;
+      filter: drop-shadow(0 1.4em 2.2em rgba(0,0,0,.82));
+      animation: giBowBreath 3.8s ease-in-out infinite;
+    }
+    #giftIntro:not(.untie) .gi-centerpiece:hover .gi-bow { transform: translate(-50%, -52%) scale(1.045); }
+    .gi-bow g, .gi-bow path { transform-box: fill-box; }
+    .gi-bow .bow-l { transform-origin: 100% 54%; }
+    .gi-bow .bow-r { transform-origin: 0% 54%; }
+    .gi-bow .bow-knot { transform-origin: 50% 50%; }
+    .gi-bow .bow-tail-l { transform-origin: 92% 4%; }
+    .gi-bow .bow-tail-r { transform-origin: 8% 4%; }
+    /* Loose ribbon strands that whip & draw out through the knot as the bow unties */
+    .gi-bow .loose-strand {
+      fill: none; stroke: url(#giGold); stroke-width: 16; stroke-linecap: round;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.65));
+      stroke-dasharray: 520; stroke-dashoffset: 520; opacity: 0;
+    }
+
+    /* LUSH Cosmetics & Jewelleries seal sticker pinned over the center ribbon knot */
+    .gi-sticker {
+      position: absolute; left: 50%; top: 50%; width: 15.2em; height: 11.8em; z-index: 6;
+      padding: .5em; background: linear-gradient(135deg, #FFFDF7, #F3E5AB, #FFFDF7);
+      border-radius: 1.1em; border: .16em solid #D4AF37;
+      transform: translate(-50%, -42%) rotate(-2.5deg); transform-origin: 15% 90%;
+      box-shadow: 0 1.2em 2.8em rgba(0,0,0,.82), 0 0 0 .35em rgba(212,175,55,.22);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    #giftIntro:not(.untie) .gi-centerpiece:hover .gi-sticker {
+      transform: translate(-50%, -42%) rotate(0deg) scale(1.06);
+      box-shadow: 0 1.4em 3.2em rgba(0,0,0,.9), 0 0 2.2em rgba(247,231,161,.55);
+    }
+    .gi-sticker-logo {
+      position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: .75em;
+      background: #000 url('./images/lush_logo.jpg') center / 122% auto no-repeat;
+      box-shadow: inset 0 0 0 .2em #D4AF37;
+    }
+    .gi-sticker-logo::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 42%; left: -60%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+      animation: giSheen 3s ease-in-out infinite .8s;
+    }
+    .gi-burst {
+      position: absolute; left: 50%; top: 50%; width: 85em; height: 85em; margin: -42.5em 0 0 -42.5em;
+      z-index: 0; pointer-events: none; opacity: 0; transform: scale(.2);
+      transition: opacity .55s ease, transform 1.25s cubic-bezier(.16,1,.3,1);
+    }
+    .gi-rays {
+      width: 100%; height: 100%; border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255,248,214,.95) 0%, rgba(247,231,161,.55) 14%, rgba(212,175,55,.2) 32%, transparent 62%),
+        repeating-conic-gradient(from 0deg, rgba(255,240,190,.28) 0deg 6deg, transparent 6deg 18deg);
+      -webkit-mask: radial-gradient(circle, #000 18%, transparent 68%);
+      mask: radial-gradient(circle, #000 18%, transparent 68%);
+      animation: giSpin 18s linear infinite;
+    }
+    .gi-confetti { position: absolute; left: 50%; top: 50%; width: 0; height: 0; z-index: 7; pointer-events: none; }
+    .gi-confetti i { position: absolute; left: 0; top: 0; opacity: 0; animation: giConfetti 1.9s cubic-bezier(.12,.75,.3,1) forwards; }
+
+    /* ===== REALISTIC RIBBON UNTYING CHOREOGRAPHY =====
+       1) Seal sticker curls & lifts off the knot (0.00s – 0.65s)
+       2) Tail ends tug downward; center knot squeezes & loosens; bow loops pull inward through the knot (0.18s – 1.15s)
+       3) Silky loose ribbon strands unfurl & whip outward as the knot comes undone (0.42s – 1.25s)
+       4) All 4 full-screen satin ribbons slacken with a wave & slide off the edges (0.68s – 1.55s)
+    */
+    #giftIntro.untie { cursor: default; }
+    #giftIntro.untie .gi-bow { animation: none; }
+    #giftIntro.untie .gi-welcome, #giftIntro.untie .gi-hint { opacity: 0; transform: translateY(8px); animation: none; }
+    #giftIntro.untie .gi-sticker { animation: giStickerUnseal .78s cubic-bezier(.45,0,.55,1) forwards; }
+    #giftIntro.untie .bow-tail-l { animation: giTailPullL 1.15s cubic-bezier(.4,0,.2,1) .14s forwards; }
+    #giftIntro.untie .bow-tail-r { animation: giTailPullR 1.15s cubic-bezier(.4,0,.2,1) .17s forwards; }
+    #giftIntro.untie .bow-knot   { animation: giKnotUntie .95s cubic-bezier(.45,0,.55,1) .2s forwards; }
+    #giftIntro.untie .bow-l      { animation: giLoopSlipL 1.05s cubic-bezier(.5,0,.2,1) .24s forwards; }
+    #giftIntro.untie .bow-r      { animation: giLoopSlipR 1.05s cubic-bezier(.5,0,.2,1) .27s forwards; }
+    #giftIntro.untie .loose-strand.l { animation: giStrandWhipL .95s cubic-bezier(.22,.61,.36,1) .42s forwards; }
+    #giftIntro.untie .loose-strand.r { animation: giStrandWhipR .95s cubic-bezier(.22,.61,.36,1) .45s forwards; }
+
+    #giftIntro.untie .gi-screen-rib-v .t { animation: giRibSlideTop .92s cubic-bezier(.6,0,.3,1) .66s forwards; }
+    #giftIntro.untie .gi-screen-rib-v .b { animation: giRibSlideBot .92s cubic-bezier(.6,0,.3,1) .68s forwards; }
+    #giftIntro.untie .gi-screen-rib-h .l { animation: giRibSlideLeft .95s cubic-bezier(.6,0,.3,1) .72s forwards; }
+    #giftIntro.untie .gi-screen-rib-h .r { animation: giRibSlideRight .95s cubic-bezier(.6,0,.3,1) .74s forwards; }
+
+    /* Step 2 — open: golden burst + confetti from center */
+    #giftIntro.open .gi-burst { opacity: 1; transform: scale(1); }
+    /* Step 3 — reveal: full-screen black wrapping paper splits & folds open */
+    #giftIntro.reveal { pointer-events: none; }
+    #giftIntro.reveal .gi-door.l { transform: translateX(-103%) rotateY(-12deg); box-shadow: none; }
+    #giftIntro.reveal .gi-door.r { transform: translateX(103%) rotateY(12deg); box-shadow: none; }
+    #giftIntro.reveal .gi-stage { opacity: 0; transform: scale(1.06); transition: opacity .55s ease, transform .85s ease; }
+    #giftIntro.reveal .gi-vignette, #giftIntro.reveal .gi-sparkles, #giftIntro.reveal .gi-skip { opacity: 0; }
+
+    @keyframes giBowBreath {
+      0%, 100% { transform: translate(-50%, -52%) scale(1); }
+      50% { transform: translate(-50%, -53.5%) scale(1.028); }
+    }
+    @keyframes giHint { 0%, 100% { opacity: .84; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-4px); } }
+    @keyframes giTwinkle { 0%, 100% { opacity: 0; transform: scale(.4) rotate(0); } 50% { opacity: .95; transform: scale(1) rotate(45deg); } }
+    @keyframes giSheen { 0%, 60% { left: -60%; } 100% { left: 130%; } }
+    @keyframes giSpin { to { transform: rotate(360deg); } }
+
+    /* Seal sticker curls from bottom-right corner and lifts cleanly off the knot */
+    @keyframes giStickerUnseal {
+      0%   { transform: translate(-50%, -42%) rotate(-2.5deg) scale(1); opacity: 1; }
+      35%  { transform: translate(-50%, -46%) rotate(4deg) perspective(500px) rotateX(28deg) rotateY(-22deg) scale(1.06); opacity: 1; }
+      75%  { transform: translate(-38%, -95%) rotate(14deg) perspective(500px) rotateX(48deg) rotateY(-35deg) scale(.86); opacity: .75; }
+      100% { transform: translate(-25%, -145%) rotate(22deg) scale(.65); opacity: 0; }
+    }
+    /* Tails tug down first (like fingers pulling the ribbon ends), then whip outward as the knot releases */
+    @keyframes giTailPullL {
+      0%   { transform: translate(0, 0) rotate(0deg) scaleY(1); opacity: 1; }
+      28%  { transform: translate(-10px, 24px) rotate(8deg) scaleY(1.16); opacity: 1; }
+      62%  { transform: translate(-44px, 78px) rotate(-18deg) scaleY(1.24) scaleX(.85); opacity: .95; }
+      100% { transform: translate(-150px, 230px) rotate(-38deg) scaleY(1.05) scaleX(.7); opacity: 0; }
+    }
+    @keyframes giTailPullR {
+      0%   { transform: translate(0, 0) rotate(0deg) scaleY(1); opacity: 1; }
+      28%  { transform: translate(10px, 24px) rotate(-8deg) scaleY(1.16); opacity: 1; }
+      62%  { transform: translate(44px, 78px) rotate(18deg) scaleY(1.24) scaleX(.85); opacity: .95; }
+      100% { transform: translate(150px, 230px) rotate(38deg) scaleY(1.05) scaleX(.7); opacity: 0; }
+    }
+    /* Knot tightens under tension, then loosens and unravels horizontally */
+    @keyframes giKnotUntie {
+      0%   { transform: scale(1, 1) rotate(0deg); opacity: 1; }
+      26%  { transform: scale(.84, 1.14) rotate(-3deg); opacity: 1; }
+      55%  { transform: scale(1.28, .72) rotate(4deg); opacity: .95; }
+      82%  { transform: scale(1.65, .32) translateY(14px); opacity: .45; }
+      100% { transform: scale(2.1, .08) translateY(28px); opacity: 0; }
+    }
+    /* Bow loops get drawn inward through the loosening knot, flatten into ribbon strips & slip free */
+    @keyframes giLoopSlipL {
+      0%   { transform: translate(0, 0) scale(1, 1) rotate(0deg); opacity: 1; }
+      30%  { transform: translate(16px, 4px) scale(.76, .92) rotate(-10deg); opacity: 1; }
+      62%  { transform: translate(34px, 14px) scale(.38, .62) rotate(-24deg); opacity: .92; }
+      100% { transform: translate(-110px, 85px) scale(.18, .28) rotate(-48deg); opacity: 0; }
+    }
+    @keyframes giLoopSlipR {
+      0%   { transform: translate(0, 0) scale(1, 1) rotate(0deg); opacity: 1; }
+      30%  { transform: translate(-16px, 4px) scale(.76, .92) rotate(10deg); opacity: 1; }
+      62%  { transform: translate(-34px, 14px) scale(.38, .62) rotate(24deg); opacity: .92; }
+      100% { transform: translate(110px, 85px) scale(.18, .28) rotate(48deg); opacity: 0; }
+    }
+    /* Loose ribbon strands whip outward from the untied knot before sliding away */
+    @keyframes giStrandWhipL {
+      0%   { stroke-dashoffset: 520; opacity: 0; transform: translate(0, 0) rotate(0deg); }
+      20%  { opacity: 1; }
+      65%  { stroke-dashoffset: 0; opacity: 1; transform: translate(-24px, 18px) rotate(-8deg); }
+      100% { stroke-dashoffset: -420; opacity: 0; transform: translate(-140px, 95px) rotate(-18deg); }
+    }
+    @keyframes giStrandWhipR {
+      0%   { stroke-dashoffset: 520; opacity: 0; transform: translate(0, 0) rotate(0deg); }
+      20%  { opacity: 1; }
+      65%  { stroke-dashoffset: 0; opacity: 1; transform: translate(24px, 18px) rotate(8deg); }
+      100% { stroke-dashoffset: -420; opacity: 0; transform: translate(140px, 95px) rotate(18deg); }
+    }
+    /* Full-screen crossed ribbons slacken with a natural wave as tension releases, then slide off-screen */
+    @keyframes giRibSlideTop {
+      0%   { transform: translate(-50%, 0) scaleX(1); }
+      24%  { transform: translate(-47%, -6%) scaleX(.92) skewX(3deg); }
+      100% { transform: translate(-52%, -108%) scaleX(.82) skewX(-5deg); }
+    }
+    @keyframes giRibSlideBot {
+      0%   { transform: translate(-50%, 0) scaleX(1); }
+      24%  { transform: translate(-53%, 6%) scaleX(.92) skewX(-3deg); }
+      100% { transform: translate(-48%, 108%) scaleX(.82) skewX(5deg); }
+    }
+    @keyframes giRibSlideLeft {
+      0%   { transform: translate(0, -50%) scaleY(1); }
+      24%  { transform: translate(-6%, -47%) scaleY(.92) skewY(-2.5deg); }
+      100% { transform: translate(-108%, -53%) scaleY(.82) skewY(4deg); }
+    }
+    @keyframes giRibSlideRight {
+      0%   { transform: translate(0, -50%) scaleY(1); }
+      24%  { transform: translate(6%, -53%) scaleY(.92) skewY(2.5deg); }
+      100% { transform: translate(108%, -47%) scaleY(.82) skewY(-4deg); }
+    }
+    @keyframes giConfetti {
+      0%   { opacity: 1; transform: translate(0, 0) rotate(0); }
+      75%  { opacity: 1; }
+      100% { opacity: 0; transform: translate(var(--x), var(--y)) rotate(var(--r)); }
+    }
+    @keyframes giSiteIn { from { transform: scale(.96); opacity: .35; } to { transform: none; opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .gi-bow, .gi-hint, .gi-sparkles span, .gi-rays, .gi-sticker-logo::after { animation: none !important; }
+    }
+
+    /* ===== RIGHT-SIDE SCROLL-SPY HUD OVERLAY (getartcraft-style C-path character scrubber) ===== */
+    #scrollSpyHud {
+      position: fixed;
+      top: 74px;
+      bottom: 0;
+      right: 0;
+      width: 248px;
+      z-index: 950;
+      pointer-events: none;
+      user-select: none;
+      font-family: var(--font-b);
+      transition: opacity 0.35s ease;
+    }
+    #scrollSpyHud.hud-hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .hud-backdrop {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 224px;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      box-shadow: none;
+      pointer-events: none;
+    }
+    /* Vertical tick-mark ruler along the right edge reaching the bottom of the page */
+    .hud-ruler {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 6px;
+      width: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+      z-index: 4;
+    }
+    .hud-tick {
+      display: block;
+      width: 5px;
+      height: 1.2px;
+      background: rgba(20, 90, 56, 0.28);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+      border-radius: 1px;
+      will-change: width, opacity, background-color;
+    }
+    .hud-tick.major {
+      width: 10px;
+      background: rgba(20, 90, 56, 0.48);
+    }
+    .hud-tick.lit {
+      background: rgba(30, 126, 78, 0.68);
+    }
+    .hud-tick.major.lit {
+      background: rgba(20, 90, 56, 0.92);
+    }
+    .hud-ruler-marker {
+      position: absolute;
+      right: 0;
+      top: 0%;
+      width: 14px;
+      height: 2.5px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(30, 126, 78, 0.85));
+      box-shadow: 0 0 8px rgba(30, 126, 78, 0.55), 0 0 4px rgba(255, 255, 255, 0.95);
+      transform: translateY(-50%);
+      pointer-events: none;
+      border-radius: 2px;
+    }
+    /* Top-right Past Stack & Bottom-right Upcoming Stack */
+    .hud-stack {
+      position: absolute;
+      right: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      z-index: 3;
+    }
+    .hud-stack-past {
+      top: 12px;
+    }
+    .hud-stack-upcoming {
+      bottom: 84px;
+    }
+    /* Transparent glass typography for stack items */
+    .hud-stack-item {
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: rgba(20, 90, 56, 0.28);
+      -webkit-text-stroke: 0.5px rgba(20, 90, 56, 0.45);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85), 0 2px 6px rgba(20, 60, 40, 0.08);
+      white-space: nowrap;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+    }
+    .hud-stack-item:hover {
+      color: rgba(20, 90, 56, 0.65);
+    }
+    /* Active Section Header below top stack (see-through transparent crystal glass font) */
+    .hud-active-wrap {
+      position: absolute;
+      right: 26px;
+      top: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      z-index: 3;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .hud-active-title {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.22);
+      -webkit-text-stroke: 1.15px rgba(20, 90, 56, 0.58);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.92), 0 4px 12px rgba(20, 60, 40, 0.14);
+      white-space: nowrap;
+      transform-origin: right center;
+    }
+    .hud-active-underline {
+      width: 100%;
+      min-width: 148px;
+      height: 2.5px;
+      background: rgba(255, 255, 255, 0.25);
+      border: 0.5px solid rgba(20, 90, 56, 0.35);
+      margin-top: 6px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      box-shadow: 0 1px 4px rgba(20, 60, 40, 0.08);
+    }
+    .hud-active-underline-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(30, 126, 78, 0.62));
+      box-shadow: 0 0 6px rgba(82, 183, 136, 0.55);
+    }
+    .hud-active-meta {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+      color: rgba(20, 90, 56, 0.42);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+    }
+    .hud-active-pct {
+      color: rgba(255, 255, 255, 0.28);
+      -webkit-text-stroke: 0.65px rgba(20, 90, 56, 0.62);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.92), 0 2px 6px rgba(20, 60, 40, 0.12);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+    /* C-path character-by-character scrubbing stage (transparent glass characters) */
+    .hud-scrub-stage {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: visible;
+    }
+    .hud-scrub-char {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.22);
+      -webkit-text-stroke: 1.15px rgba(20, 90, 56, 0.58);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.92), 0 3px 10px rgba(20, 60, 40, 0.14);
+      white-space: pre;
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+    /* Hidden measurement helper for exact character coordinates */
+    .hud-measure-box {
+      position: absolute;
+      visibility: hidden;
+      pointer-events: none;
+      right: 26px;
+      top: 0;
+      white-space: nowrap;
+    }
+    @media (max-width: 900px) {
+      #scrollSpyHud {
+        top: 112px;
+        bottom: 0;
+        width: 185px;
+      }
+      .hud-backdrop {
+        width: 168px;
+      }
+      .hud-active-title, .hud-scrub-char {
+        font-size: 20px;
+      }
+      .hud-stack-item {
+        font-size: 9.5px;
+        letter-spacing: 1.2px;
+      }
+      .hud-active-underline {
+        min-width: 105px;
+      }
+      .hud-stack-upcoming {
+        bottom: 66px;
+      }
+    }
+    @media (max-width: 560px) {
+      #scrollSpyHud {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
+
+<!-- ═══════════════ GIFT WRAP OVERLAY (KEPT FOR OFFER REVEALS) ═══════════════ -->
+<div id="giftIntro" role="dialog" aria-modal="true" aria-label="Special Offer Reveal from LUSH Cosmetics &amp; Jewelleries — press Enter to unwrap" tabindex="0" onclick="openGift()" onkeydown="giftKey(event)">
+  <!-- Full-screen black printed wrapping paper with side-view LUSH watermark pattern -->
+  <div class="gi-door l"><div class="gi-paper"><div class="gi-wm-sheet" aria-hidden="true"></div></div></div>
+  <div class="gi-door r"><div class="gi-paper"><div class="gi-wm-sheet" aria-hidden="true"></div></div></div>
+  <div class="gi-vignette"></div>
+  <div class="gi-sparkles" aria-hidden="true"></div>
+
+  <!-- Full-screen crossed satin gold ribbons -->
+  <div class="gi-screen-rib-h" aria-hidden="true"><i class="l"></i><i class="r"></i></div>
+  <div class="gi-screen-rib-v" aria-hidden="true"><i class="t"></i><i class="b"></i></div>
+
+  <div class="gi-stage">
+    <p class="gi-welcome">✦ Welcome to LUSH Cosmetics &amp; Jewelleries — Wrapped Just for You ✦</p>
+
+    <div class="gi-centerpiece" aria-hidden="true">
+      <div class="gi-burst"><div class="gi-rays"></div></div>
+
+      <!-- Realistic multi-dimensional satin bow tied where the ribbons cross -->
+      <svg class="gi-bow" viewBox="0 0 320 240">
+        <defs>
+          <linearGradient id="giGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FFF7D1"/>
+            <stop offset=".25" stop-color="#F1D06E"/>
+            <stop offset=".55" stop-color="#C99A2E"/>
+            <stop offset=".82" stop-color="#8C6312"/>
+            <stop offset="1" stop-color="#5A3E08"/>
+          </linearGradient>
+          <linearGradient id="giGoldInner" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#6B4B0C"/>
+            <stop offset=".5" stop-color="#3E2A05"/>
+            <stop offset="1" stop-color="#8B6315"/>
+          </linearGradient>
+          <linearGradient id="giKnotGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFF6CE"/>
+            <stop offset=".42" stop-color="#DFB648"/>
+            <stop offset=".8" stop-color="#9A6E16"/>
+            <stop offset="1" stop-color="#583C07"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Loose satin strands that whip out when the knot unties -->
+        <path class="loose-strand l" d="M160 112 C 115 118, 68 148, 12 208"/>
+        <path class="loose-strand r" d="M160 112 C 205 118, 252 148, 308 208"/>
+
+        <!-- Flowing notched satin ribbon tails with realistic wave & underside fold -->
+        <g class="bow-tail-l">
+          <path d="M148 116 C 134 150, 108 186, 82 224 L 106 214 L 118 232 C 138 194, 152 156, 160 120 Z" fill="url(#giGoldInner)" opacity=".85"/>
+          <path d="M142 114 C 122 148, 92 184, 58 222 L 88 212 L 98 230 C 124 192, 144 154, 156 118 Z" fill="url(#giGold)" stroke="#6B4B0C" stroke-width="1"/>
+          <path d="M138 126 C 120 156, 96 184, 72 210" stroke="#FFF9DF" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".65"/>
+        </g>
+        <g class="bow-tail-r">
+          <path d="M172 116 C 186 150, 212 186, 238 224 L 214 214 L 202 232 C 182 194, 168 156, 160 120 Z" fill="url(#giGoldInner)" opacity=".85"/>
+          <path d="M178 114 C 198 148, 228 184, 262 222 L 232 212 L 222 230 C 196 192, 176 154, 164 118 Z" fill="url(#giGold)" stroke="#6B4B0C" stroke-width="1"/>
+          <path d="M182 126 C 200 156, 224 184, 248 210" stroke="#FFF9DF" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".65"/>
+        </g>
+
+        <!-- Left satin bow loop (inner shadow cavity + outer pleated satin loop + specular highlight + knot pinch creases) -->
+        <g class="bow-l">
+          <path d="M156 108 C 112 58, 36 46, 24 88 C 16 120, 86 132, 156 112 Z" fill="url(#giGoldInner)"/>
+          <path d="M158 108 C 114 34, 18 14, 12 78 C 6 136, 102 142, 158 112 Z" fill="url(#giGold)" stroke="#6B4B0C" stroke-width="1.2"/>
+          <path d="M154 108 C 118 82, 54 68, 34 88 C 22 102, 86 120, 154 110 Z" fill="url(#giGoldInner)" opacity=".48"/>
+          <path d="M32 54 C 58 38, 96 48, 126 76" stroke="#FFF9DF" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/>
+          <path d="M148 102 C 128 96, 112 96, 96 102" stroke="#5A3E08" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".65"/>
+        </g>
+
+        <!-- Right satin bow loop -->
+        <g class="bow-r">
+          <path d="M164 108 C 208 58, 284 46, 296 88 C 304 120, 234 132, 164 112 Z" fill="url(#giGoldInner)"/>
+          <path d="M162 108 C 206 34, 302 14, 308 78 C 314 136, 218 142, 162 112 Z" fill="url(#giGold)" stroke="#6B4B0C" stroke-width="1.2"/>
+          <path d="M166 108 C 202 82, 266 68, 286 88 C 298 102, 234 120, 166 110 Z" fill="url(#giGoldInner)" opacity=".48"/>
+          <path d="M288 54 C 262 38, 224 48, 194 76" stroke="#FFF9DF" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/>
+          <path d="M172 102 C 192 96, 208 96, 224 102" stroke="#5A3E08" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".65"/>
+        </g>
+
+        <!-- Gathered center satin knot with realistic folds -->
+        <g class="bow-knot">
+          <path d="M138 88 C 148 82, 172 82, 182 88 C 188 100, 188 118, 182 128 C 172 134, 148 134, 138 128 C 132 118, 132 100, 138 88 Z" fill="url(#giKnotGrad)" stroke="#5A3E08" stroke-width="1.6"/>
+          <path d="M144 96 C 154 91, 166 91, 176 96" stroke="#FFF9DF" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+          <path d="M142 114 C 154 119, 166 119, 178 114" stroke="#5A3E08" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".6"/>
+        </g>
+      </svg>
+
+      <!-- LUSH logo seal sticker on the center ribbon tie -->
+      <div class="gi-sticker"><div class="gi-sticker-logo"></div></div>
+      <div class="gi-confetti"></div>
+    </div>
+
+    <p class="gi-hint"><i class="fa fa-hand-pointer"></i> Click the LUSH ribbon seal to untie &amp; unwrap store</p>
+  </div>
+
+  <button type="button" class="gi-skip" onclick="skipGift(event)">Skip intro <i class="fa fa-forward"></i></button>
+</div>
 <div id="scroll-progress"></div>
 <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top"><i class="fa fa-chevron-up"></i></button>
+<a id="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-shop="whatsapp">
+  <i class="fa-brands fa-whatsapp"></i>
+  <span class="wa-tooltip">Chat with us</span>
+</a>
+
+<!-- RIGHT-SIDE SCROLL-SPY HUD OVERLAY -->
+<aside id="scrollSpyHud" aria-label="Page section scroll navigation">
+  <div class="hud-backdrop" aria-hidden="true"></div>
+  <div class="hud-ruler" id="hudRuler" aria-hidden="true">
+    <span class="hud-ruler-marker" id="hudRulerMarker"></span>
+  </div>
+  <div class="hud-stack hud-stack-past" id="hudPastStack"></div>
+  <div class="hud-active-wrap" id="hudActiveWrap">
+    <div class="hud-active-title" id="hudActiveTitle">WELCOME</div>
+    <div class="hud-active-underline">
+      <div class="hud-active-underline-fill" id="hudActiveLineFill"></div>
+    </div>
+    <div class="hud-active-meta">
+      <span id="hudSecIdx">01 / 06</span>
+      <span class="hud-active-pct" id="hudPct">01%</span>
+    </div>
+  </div>
+  <div class="hud-stack hud-stack-upcoming" id="hudUpcomingStack"></div>
+  <div class="hud-scrub-stage" id="hudScrubStage" aria-hidden="true"></div>
+  <div class="hud-measure-box" id="hudMeasureBox" aria-hidden="true"></div>
+</aside>
 
 <!-- LUSH LOGO BACKGROUND WATERMARK BEHIND SCREEN -->
 <div class="lush-bg-watermark" aria-hidden="true">
@@ -716,9 +1666,16 @@
       <span><i class="fa fa-gift"></i> Valentine's, Birthday & Lovers' Gift Packs Available!</span>
       <span><i class="fa fa-credit-card"></i> PayHere | Koko BNPL | COD</span>
     </div>
-    <a href="#admin" onclick="openAdminLogin()" style="color:var(--accent-emerald);font-weight:700;font-size:11px;">
-      <i class="fa fa-lock"></i> Admin Portal
-    </a>
+    <div class="ann-right">
+      <div class="ann-socials">
+        <a href="#" target="_blank" rel="noopener" aria-label="Facebook" data-shop="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" target="_blank" rel="noopener" aria-label="TikTok" data-shop="tiktok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" target="_blank" rel="noopener" aria-label="WhatsApp" data-shop="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+      <a href="#admin" onclick="openAdminLogin()" style="color:var(--accent-emerald);font-weight:700;font-size:11px;">
+        <i class="fa fa-lock"></i> Admin Portal
+      </a>
+    </div>
   </div>
 </div>
 
@@ -735,9 +1692,13 @@
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#products">Shop All</a></li>
-        <li><a href="#visit">📍 Visit Us</a></li>
+        <li class="nav-dd">
+          <a href="#categories">Categories <i class="fa fa-chevron-down" style="font-size:9px"></i></a>
+          <div class="nav-dd-menu" id="navCatMenu"></div>
+        </li>
+        <li><a href="#brands">Brands A–Z</a></li>
         <li><a href="#gifts">Gifts</a></li>
-        <li><a href="#payments">Payments</a></li>
+        <li><a href="#visit">📍 Visit Us</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -758,10 +1719,20 @@
       </button>
     </div>
   </div>
+  <!-- Mobile quick links (main nav is hidden on small screens) -->
+  <div class="mobile-quick">
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#brands">Brands A–Z</a>
+    <a href="#products">Shop All</a>
+    <a href="#gifts">Gifts</a>
+    <a href="#visit">Visit Us</a>
+  </div>
 </header>
 
 <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• STORE VIEW â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div id="storeView">
+  <div id="homePage">
 
   <!-- HERO -->
   <section class="hero" id="home">
@@ -806,24 +1777,24 @@
 
       <div class="hero-imgs">
         <div class="hero-img-card tall">
-          <img src="./images/ceylon_glow_serum.jpg" alt="Lotus & Sandalwood Botanical Skincare">
+          <img id="heroImg0" src="./images/ceylon_glow_serum.jpg" alt="Lotus & Sandalwood Botanical Skincare" onerror="this.onerror=null;this.src='./images/ceylon_glow_serum.jpg';">
           <div class="hero-card-caption">
-            <span>🌿 Lotus &amp; Sandalwood Glow</span>
-            <small>Pure Botanical</small>
+            <span id="heroCapTitle0">🌿 Lotus &amp; Sandalwood Glow</span>
+            <small id="heroCapSub0">Pure Botanical</small>
           </div>
         </div>
         <div class="hero-img-card">
-          <img src="./images/ceylon_emerald_earrings.jpg" alt="Ceylon Emerald & Gold Filigree Jewellery">
+          <img id="heroImg1" src="./images/ceylon_emerald_earrings.jpg" alt="Ceylon Emerald & Gold Filigree Jewellery" onerror="this.onerror=null;this.src='./images/ceylon_emerald_earrings.jpg';">
           <div class="hero-card-caption">
-            <span>💎 Ceylon Emerald &amp; Gold</span>
-            <small>18K Plated</small>
+            <span id="heroCapTitle1">💎 Ceylon Emerald &amp; Gold</span>
+            <small id="heroCapSub1">18K Plated</small>
           </div>
         </div>
         <div class="hero-img-card">
-          <img src="./images/ceylon_botanical_elixir.jpg" alt="Ceylon Gold Radiance Elixir">
+          <img id="heroImg2" src="./images/ceylon_botanical_elixir.jpg" alt="Ceylon Gold Radiance Elixir" onerror="this.onerror=null;this.src='./images/ceylon_botanical_elixir.jpg';">
           <div class="hero-card-caption">
-            <span>✨ Radiance Botanical Elixir</span>
-            <small>Signature</small>
+            <span id="heroCapTitle2">✨ Radiance Botanical Elixir</span>
+            <small id="heroCapSub2">Signature</small>
           </div>
         </div>
       </div>
@@ -833,34 +1804,22 @@
   <!-- CATEGORY STRIP -->
   <section class="cat-strip">
     <div class="container">
-      <p class="cat-strip-title"><i class="fa fa-th-large"></i> Browse by Category</p>
+      <p class="cat-strip-title"><i class="fa fa-th-large"></i> Browse by Category
+        <a href="#categories" class="cat-strip-link">All category pages <i class="fa fa-arrow-right"></i></a>
+        <a href="#brands" class="cat-strip-link">Brands A – Z <i class="fa fa-arrow-right"></i></a>
+      </p>
       <div class="cat-pills">
-        <div class="cat-pill active" onclick="filterCat('all',this)"><i class="fa fa-border-all"></i> All Items</div>
-        <div class="cat-pill" onclick="filterCat('cosmetics',this)"><i class="fa fa-pump-soap"></i> Cosmetics & Skincare</div>
-        <div class="cat-pill" onclick="filterCat('perfume',this)"><i class="fa fa-bottle-droplet"></i> Perfumes & Sprays</div>
-        <div class="cat-pill" onclick="filterCat('jewelry',this)"><i class="fa fa-gem"></i> Gold-Plated Jewellery</div>
-        <div class="cat-pill" onclick="filterCat('gifts',this)"><i class="fa fa-gift"></i> Teddy Bears & Gifts</div>
-        <div class="cat-pill" onclick="filterCat('valentine',this)"><i class="fa fa-heart"></i> Valentine's & Lovers</div>
-        <div class="cat-pill" onclick="filterCat('birthday',this)"><i class="fa fa-cake-candles"></i> Birthday Party</div>
-        <div class="cat-pill" onclick="filterCat('chocolate',this)"><i class="fa fa-cookie-bite"></i> Chocolates</div>
-        <div class="cat-pill" onclick="filterCat('makeup',this)"><i class="fa fa-brush"></i> Makeup Tools</div>
-        <div class="cat-pill" onclick="filterCat('accessories',this)"><i class="fa fa-scissors"></i> Hair & Accessories</div>
-        <div class="cat-pill" onclick="filterCat('wallet',this)"><i class="fa fa-wallet"></i> Wallets & Bags</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAYMENT GATEWAY STRIP -->
-  <section class="pay-strip" id="payments">
-    <div class="container">
-      <p class="pay-strip-title"><i class="fa fa-shield-halved"></i> Secure Sri Lanka Payment Options</p>
-      <div class="pay-pills">
-        <div class="pay-pill"><i class="fa fa-credit-card"></i> PayHere (Visa / MC / Amex)</div>
-        <div class="pay-pill"><i class="fa fa-mobile-screen-button"></i> eZ Cash & mCash</div>
-        <div class="pay-pill"><i class="fa fa-layer-group"></i> Koko / Mintpay 3Ã— BNPL</div>
-        <div class="pay-pill"><i class="fa fa-building-columns"></i> Commercial Bank Transfer</div>
-        <div class="pay-pill"><i class="fa fa-hand-holding-dollar"></i> Cash on Delivery (COD)</div>
-        <div class="pay-pill"><i class="fa fa-qrcode"></i> LankaQR / Frimi</div>
+        <div class="cat-pill active" data-cat="all" onclick="filterCat('all',this)"><i class="fa fa-border-all"></i> All Items</div>
+        <div class="cat-pill" data-cat="cosmetics" onclick="filterCat('cosmetics',this)"><i class="fa fa-pump-soap"></i> Cosmetics & Skincare</div>
+        <div class="cat-pill" data-cat="perfume" onclick="filterCat('perfume',this)"><i class="fa fa-bottle-droplet"></i> Perfumes & Sprays</div>
+        <div class="cat-pill" data-cat="jewelry" onclick="filterCat('jewelry',this)"><i class="fa fa-gem"></i> Gold-Plated Jewellery</div>
+        <div class="cat-pill" data-cat="gifts" onclick="filterCat('gifts',this)"><i class="fa fa-gift"></i> Teddy Bears & Gifts</div>
+        <div class="cat-pill" data-cat="valentine" onclick="filterCat('valentine',this)"><i class="fa fa-heart"></i> Valentine's & Lovers</div>
+        <div class="cat-pill" data-cat="birthday" onclick="filterCat('birthday',this)"><i class="fa fa-cake-candles"></i> Birthday Party</div>
+        <div class="cat-pill" data-cat="chocolate" onclick="filterCat('chocolate',this)"><i class="fa fa-cookie-bite"></i> Chocolates</div>
+        <div class="cat-pill" data-cat="makeup" onclick="filterCat('makeup',this)"><i class="fa fa-brush"></i> Makeup Tools</div>
+        <div class="cat-pill" data-cat="accessories" onclick="filterCat('accessories',this)"><i class="fa fa-scissors"></i> Hair & Accessories</div>
+        <div class="cat-pill" data-cat="wallet" onclick="filterCat('wallet',this)"><i class="fa fa-wallet"></i> Wallets & Bags</div>
       </div>
     </div>
   </section>
@@ -892,19 +1851,19 @@
             <h4>📍 Find Us</h4>
             <div class="location-item">
               <i class="fa fa-map-marker-alt"></i>
-              <span>35, Colombo Puttlam Main Road, Mahawewa, Sri Lanka</span>
+              <span data-shop="address">35, Colombo Puttlam Main Road, Mahawewa, Sri Lanka</span>
             </div>
             <div class="location-item">
               <i class="fa fa-phone"></i>
-              <a href="tel:+94764546167">076 45 46 167</a>
+              <a href="tel:+94764546167" data-shop="phone">076 45 46 167</a>
             </div>
             <div class="location-item">
               <i class="fa fa-envelope"></i>
-              <a href="mailto:info@lushceylon.lk">info@lushceylon.lk</a>
+              <a href="mailto:lushnevol2024@gmail.com" data-shop="email">lushnevol2024@gmail.com</a>
             </div>
             <div class="location-item">
-              <i class="fab fa-whatsapp"></i>
-              <a href="https://wa.me/94764546167" target="_blank">Chat on WhatsApp</a>
+              <i class="fa-brands fa-whatsapp"></i>
+              <a href="#" target="_blank" rel="noopener" data-shop="whatsapp">Chat on WhatsApp</a>
             </div>
           </div>
 
@@ -933,15 +1892,6 @@
     </div>
   </section>
 
-  <!-- PRODUCTS GRID -->
-  <section class="products-sec container" id="products">
-    <div class="sec-hdr">
-      <span class="badge badge-pink">Full Catalogue</span>
-      <h2>Shop Our Collection</h2>
-    </div>
-    <div class="prods-grid" id="prodsGrid"><!-- JS injected --></div>
-  </section>
-
   <!-- FEATURED GIFT SETS SECTION -->
   <section class="feat-sec container" id="gifts">
     <div class="sec-hdr">
@@ -949,32 +1899,76 @@
       <h2>Special Occasion Collections</h2>
     </div>
     <div class="feat-grid">
-      <div class="feat-card">
-        <img src="./images/valentines_gift_set.jpg" alt="Valentine's Set">
+      <a class="feat-card" href="#category/valentine">
+        <img src="./images/valentines_gift_set.jpg" alt="Valentine's Day">
         <div class="feat-overlay">
-          <span class="badge badge-pink" style="background:rgba(255,255,255,0.92);color:#145A38;">Valentine's Day</span>
-          <h4>Lovers' Premium Gift Bundle</h4>
-          <a class="btn btn-pink btn-sm" href="#" onclick="scrollToProducts('valentine')">Shop Gifts</a>
+          <h4>Valentine's Day</h4>
         </div>
-      </div>
-      <div class="feat-card">
-        <img src="./images/birthday_party_items.jpg" alt="Birthday">
+      </a>
+      <a class="feat-card" href="#category/birthday">
+        <img src="./images/birthday_party_items.jpg" alt="Birthday Special">
         <div class="feat-overlay">
-          <span class="badge badge-gold" style="background:rgba(255,255,255,0.92);color:#145A38;">Birthday Special</span>
-          <h4>Party Decorations & Gifts</h4>
-          <a class="btn btn-gold btn-sm" href="#" onclick="scrollToProducts('birthday')">Shop Birthday</a>
+          <h4>Birthday Special</h4>
         </div>
-      </div>
-      <div class="feat-card">
-        <img src="./images/chocolates_collection.jpg" alt="Chocolates">
+      </a>
+      <a class="feat-card" href="#category/chocolate">
+        <img src="./images/chocolates_collection.jpg" alt="Sweet Treats">
         <div class="feat-overlay">
-          <span class="badge badge-purple" style="background:rgba(255,255,255,0.92);color:#145A38;">Sweet Treats</span>
-          <h4>KitKat, Snickers & Toblerone Boxes</h4>
-          <a class="btn btn-outline btn-sm" style="background:rgba(255,255,255,0.92);color:#145A38;border-color:#fff !important;" href="#" onclick="scrollToProducts('chocolate')">Shop Chocolates</a>
+          <h4>Sweet Treats</h4>
         </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- PAYMENT GATEWAY STRIP -->
+  <section class="pay-strip" id="payments">
+    <div class="container">
+      <p class="pay-strip-title"><i class="fa fa-shield-halved"></i> Secure Sri Lanka Payment Options</p>
+      <div class="pay-pills">
+        <div class="pay-pill"><i class="fa fa-credit-card"></i> PayHere (Visa / MC / Amex)</div>
+        <div class="pay-pill"><i class="fa fa-mobile-screen-button"></i> eZ Cash & mCash</div>
+        <div class="pay-pill"><i class="fa fa-layer-group"></i> Koko / Mintpay 3Ã— BNPL</div>
+        <div class="pay-pill"><i class="fa fa-building-columns"></i> Commercial Bank Transfer</div>
+        <div class="pay-pill"><i class="fa fa-hand-holding-dollar"></i> Cash on Delivery (COD)</div>
+        <div class="pay-pill"><i class="fa fa-qrcode"></i> LankaQR / Frimi</div>
       </div>
     </div>
   </section>
+
+  </div><!-- /homePage -->
+
+  <!-- DEDICATED FULL COLLECTION PAGE (#products / #collection) -->
+  <div id="collectionPage" class="page-view">
+    <section class="products-sec container" id="products" style="padding-top:0">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="#home">Home</a><i class="fa fa-chevron-right"></i><span>Shop All Collection</span>
+      </nav>
+      <div class="page-hero">
+        <span class="badge badge-pink"><i class="fa fa-leaf"></i> Full Catalogue</span>
+        <h2>Shop Our Collection</h2>
+        <p>Browse our complete collection of authentic cosmetics, perfumes, 18K gold-plated jewellery, and gifts.</p>
+      </div>
+      <div class="cat-pills" id="collectionCatPills" style="margin-bottom:28px">
+        <div class="cat-pill active" data-cat="all" onclick="filterCat('all',this)"><i class="fa fa-border-all"></i> All Items</div>
+        <div class="cat-pill" data-cat="cosmetics" onclick="filterCat('cosmetics',this)"><i class="fa fa-pump-soap"></i> Cosmetics & Skincare</div>
+        <div class="cat-pill" data-cat="perfume" onclick="filterCat('perfume',this)"><i class="fa fa-bottle-droplet"></i> Perfumes & Sprays</div>
+        <div class="cat-pill" data-cat="jewelry" onclick="filterCat('jewelry',this)"><i class="fa fa-gem"></i> Gold-Plated Jewellery</div>
+        <div class="cat-pill" data-cat="gifts" onclick="filterCat('gifts',this)"><i class="fa fa-gift"></i> Teddy Bears & Gifts</div>
+        <div class="cat-pill" data-cat="valentine" onclick="filterCat('valentine',this)"><i class="fa fa-heart"></i> Valentine's & Lovers</div>
+        <div class="cat-pill" data-cat="birthday" onclick="filterCat('birthday',this)"><i class="fa fa-cake-candles"></i> Birthday Party</div>
+        <div class="cat-pill" data-cat="chocolate" onclick="filterCat('chocolate',this)"><i class="fa fa-cookie-bite"></i> Chocolates</div>
+        <div class="cat-pill" data-cat="makeup" onclick="filterCat('makeup',this)"><i class="fa fa-brush"></i> Makeup Tools</div>
+        <div class="cat-pill" data-cat="accessories" onclick="filterCat('accessories',this)"><i class="fa fa-scissors"></i> Hair & Accessories</div>
+        <div class="cat-pill" data-cat="wallet" onclick="filterCat('wallet',this)"><i class="fa fa-wallet"></i> Wallets & Bags</div>
+      </div>
+      <div class="prods-grid" id="prodsGrid"><!-- JS injected --></div>
+    </section>
+  </div>
+
+  <!-- CATEGORY / BRAND PAGES (rendered by router: #categories, #category/..., #brands, #brand/...) -->
+  <div id="catalogPage" class="page-view">
+    <div class="container" id="catalogInner"></div>
+  </div>
 
 </div><!-- /storeView -->
 
@@ -992,6 +1986,7 @@
     <div class="admin-tabs">
       <button class="a-tab active" onclick="switchTab('overview',this)"><i class="fa fa-chart-pie"></i> Overview</button>
       <button class="a-tab" onclick="switchTab('inventory',this)"><i class="fa fa-boxes-stacked"></i> Inventory</button>
+      <button class="a-tab" onclick="switchTab('welcome',this)"><i class="fa fa-images"></i> Welcome Photos</button>
       <button class="a-tab" onclick="switchTab('orders',this)"><i class="fa fa-truck"></i> Orders</button>
       <button class="a-tab" onclick="switchTab('gateway',this)"><i class="fa fa-credit-card"></i> Gateways</button>
     </div>
@@ -1039,6 +2034,21 @@
       </table>
     </div>
 
+    <!-- Welcome Photos Tab -->
+    <div id="tab-welcome" class="a-body" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
+        <div>
+          <h4 style="font-family:var(--font-h);color:var(--accent-gold);margin-bottom:4px">Welcome Screen Showcase Photos</h4>
+          <p style="font-size:12px;color:var(--text-muted)">Upload new photos from your computer/phone or enter an image URL to update the 3 showcase cards on the Welcome screen.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="resetWelcomePhotos()"><i class="fa fa-rotate-left"></i> Reset Defaults</button>
+          <button type="button" class="btn btn-pink btn-sm" onclick="saveWelcomePhotos()"><i class="fa fa-floppy-disk"></i> Save Welcome Photos</button>
+        </div>
+      </div>
+      <div id="welcomePhotosAdminGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;"></div>
+    </div>
+
     <!-- Orders Tab -->
     <div id="tab-orders" class="a-body" style="display:none">
       <h4 style="font-family:var(--font-h);color:var(--accent-gold);margin-bottom:14px">Sri Lanka Order Pipeline</h4>
@@ -1077,28 +2087,39 @@
       <div>
         <img src="./images/lush_logo.jpg" alt="LUSH Cosmetics & Jewelleries" style="height:70px;width:auto;border-radius:8px;object-fit:contain;margin-bottom:12px;">
         <p style="font-size:12px;color:var(--text-muted);margin:0 0 14px;max-width:300px">Sri Lanka's No. 1 online destination for cosmetics, perfumes, gold-plated jewellery, cuddly gifts, chocolates, and lifestyle accessories.</p>
-        <p style="font-size:12px;color:var(--accent-emerald)"><i class="fa fa-location-dot"></i> 35, Colombo Puttlam Main Road, Mahawewa</p>
-        <p style="font-size:12px;color:var(--text-muted);margin-top:6px"><i class="fa fa-phone"></i> 076 45 46 167</p>
-        <p style="font-size:12px;color:var(--text-muted);margin-top:4px"><i class="fa fa-envelope"></i> info@lushceylon.lk</p>
+        <p data-shop-row style="font-size:12px;color:var(--accent-emerald)"><i class="fa fa-location-dot"></i> <span data-shop="address">35, Colombo Puttlam Main Road, Mahawewa, Sri Lanka</span></p>
+        <p data-shop-row style="font-size:12px;color:var(--text-muted);margin-top:6px"><i class="fa fa-phone"></i> <a href="tel:+94764546167" data-shop="phone">076 45 46 167</a></p>
+        <p data-shop-row style="font-size:12px;color:var(--text-muted);margin-top:4px"><i class="fa fa-envelope"></i> <a href="mailto:lushnevol2024@gmail.com" data-shop="email">lushnevol2024@gmail.com</a></p>
+        <div class="foot-follow">
+          <span class="foot-follow-label">Follow Us</span>
+          <div class="foot-social-btns">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook" class="social-gold-btn" data-shop="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok" class="social-gold-btn" data-shop="tiktok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-gold-btn" data-shop="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
       </div>
       <div class="foot-col">
         <h5>Shop</h5>
         <ul>
-          <li><a href="#">Cosmetics</a></li>
-          <li><a href="#">Perfumes</a></li>
-          <li><a href="#">Gold Jewellery</a></li>
-          <li><a href="#">Makeup Tools</a></li>
-          <li><a href="#">Hair Accessories</a></li>
+          <li><a href="#categories">All Categories</a></li>
+          <li><a href="#brands">Brands A – Z</a></li>
+          <li><a href="#category/cosmetics">Cosmetics</a></li>
+          <li><a href="#category/perfume">Perfumes</a></li>
+          <li><a href="#category/jewelry">Gold Jewellery</a></li>
+          <li><a href="#category/makeup">Makeup Tools</a></li>
+          <li><a href="#category/accessories">Hair Accessories</a></li>
+          <li><a href="#category/wallet">Wallets &amp; Bags</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h5>Gifts</h5>
         <ul>
-          <li><a href="#">Teddy Bears & Plush</a></li>
-          <li><a href="#">Valentine's Gifts</a></li>
-          <li><a href="#">Birthday Sets</a></li>
-          <li><a href="#">Chocolates</a></li>
-          <li><a href="#">Ornaments</a></li>
+          <li><a href="#category/gifts">Teddy Bears &amp; Plush</a></li>
+          <li><a href="#category/valentine">Valentine's Gifts</a></li>
+          <li><a href="#category/birthday">Birthday Sets</a></li>
+          <li><a href="#category/chocolate">Chocolates</a></li>
+          <li><a href="#category/valentine">Ornaments</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -1108,7 +2129,7 @@
           <li><a href="#">COD Policy</a></li>
           <li><a href="#">Returns & Refunds</a></li>
           <li><a href="#" onclick="openAdminLogin()">Admin Login</a></li>
-          <li><a href="https://facebook.com" target="_blank">Facebook Page</a></li>
+          <li><a href="#" target="_blank" rel="noopener" data-shop="facebook">Facebook Page</a></li>
         </ul>
       </div>
     </div>
@@ -1245,6 +2266,11 @@
         </div>
       </div>
       <div class="field" style="margin-bottom:12px">
+        <label>Brand (optional — auto-detected from product name if empty)</label>
+        <input type="text" id="pBrandInput" list="brandList" placeholder="e.g. Garnier">
+        <datalist id="brandList"></datalist>
+      </div>
+      <div class="field" style="margin-bottom:12px">
         <label>Upload Product Photo (from computer/phone)</label>
         <input type="file" id="pFileInput" accept="image/*" onchange="previewUploadedImage(this)" style="padding:7px">
       </div>
@@ -1268,6 +2294,67 @@
 
 <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• JAVASCRIPT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <script>
+// EDIT YOUR SHOP CONTACT DETAILS HERE — changes update the whole site
+const SHOP_SETTINGS = {
+  whatsappNumber:  "94764546167",      // international format, no + or spaces
+  phoneDisplay:    "076 45 46 167",    // how the number is shown on the page
+  email:           "lushnevol2024@gmail.com",
+  address:         "35, Colombo Puttlam Main Road, Mahawewa, Sri Lanka",
+  facebookUrl:     "https://www.facebook.com/Lush Cosmetics & Jewelries",
+  tiktokUrl:       "https://www.tiktok.com/@lush_lovi",
+  whatsappMessage: "Hi LUSH! I'd like to know more about your products."
+};
+
+function applyShopSettings() {
+  const s = SHOP_SETTINGS || {};
+  const waNum = String(s.whatsappNumber || '').trim().replace(/^\+/, '');
+  const phoneText = String(s.phoneDisplay || '').trim() || (waNum ? '+' + waNum : '');
+  const email = String(s.email || '').trim();
+  const address = String(s.address || '').trim();
+  const fbUrl = String(s.facebookUrl || '').trim();
+  const ttUrl = String(s.tiktokUrl || '').trim();
+  const waMsg = String(s.whatsappMessage || '').trim();
+  const waUrl = waNum
+    ? 'https://wa.me/' + waNum + (waMsg ? '?text=' + encodeURIComponent(waMsg) : '')
+    : '';
+
+  const hideShopEl = (el) => {
+    const row = el.closest('.location-item, li, [data-shop-row]');
+    if (row) row.style.display = 'none';
+    else el.style.display = 'none';
+  };
+
+  document.querySelectorAll('[data-shop]').forEach(el => {
+    const type = el.getAttribute('data-shop');
+    if (type === 'phone') {
+      if (!waNum && !phoneText) { hideShopEl(el); return; }
+      if (el.tagName === 'A' && waNum) el.href = 'tel:+' + waNum;
+      if (phoneText) el.textContent = phoneText;
+    } else if (type === 'whatsapp') {
+      if (!waUrl) { hideShopEl(el); return; }
+      if (el.tagName === 'A') el.href = waUrl;
+    } else if (type === 'email') {
+      if (!email) { hideShopEl(el); return; }
+      if (el.tagName === 'A') el.href = 'mailto:' + email;
+      el.textContent = email;
+    } else if (type === 'address') {
+      if (!address) { hideShopEl(el); return; }
+      el.textContent = address;
+    } else if (type === 'facebook') {
+      if (!fbUrl) { hideShopEl(el); return; }
+      if (el.tagName === 'A') el.href = fbUrl;
+    } else if (type === 'tiktok') {
+      if (!ttUrl) { hideShopEl(el); return; }
+      if (el.tagName === 'A') el.href = ttUrl;
+    }
+  });
+
+  // Hide the "Follow Us" row if all social links are empty
+  document.querySelectorAll('.foot-follow').forEach(row => {
+    if (!waUrl && !fbUrl && !ttUrl) row.style.display = 'none';
+  });
+}
+
 const RATE = 305; // LKR per USD
 let currency = 'LKR';
 let cart = [];
@@ -1430,7 +2517,83 @@ function saveProductsToBackend() {
   }
 }
 
-// Sync live across tabs when Admin uploads/edits products in another tab
+const WELCOME_PHOTOS_KEY = 'lush_ceylon_welcome_photos_v1';
+const DEFAULT_WELCOME_PHOTOS = [
+  {
+    slotLabel: 'Photo 1 — Tall Left Card',
+    img: './images/ceylon_glow_serum.jpg',
+    title: '🌿 Lotus & Sandalwood Glow',
+    sub: 'Pure Botanical',
+    showTitle: true,
+    showSub: true
+  },
+  {
+    slotLabel: 'Photo 2 — Top Right Card',
+    img: './images/ceylon_emerald_earrings.jpg',
+    title: '💎 Ceylon Emerald & Gold',
+    sub: '18K Plated',
+    showTitle: true,
+    showSub: true
+  },
+  {
+    slotLabel: 'Photo 3 — Bottom Right Card',
+    img: './images/ceylon_botanical_elixir.jpg',
+    title: '✨ Radiance Botanical Elixir',
+    sub: 'Signature',
+    showTitle: true,
+    showSub: true
+  }
+];
+let welcomePhotos = DEFAULT_WELCOME_PHOTOS.map(item => ({ ...item }));
+
+function loadWelcomePhotos() {
+  try {
+    const saved = localStorage.getItem(WELCOME_PHOTOS_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length === 3) {
+        welcomePhotos = DEFAULT_WELCOME_PHOTOS.map((def, i) => ({
+          slotLabel: def.slotLabel,
+          img: (parsed[i] && parsed[i].img) || def.img,
+          title: parsed[i] && typeof parsed[i].title === 'string' ? parsed[i].title : def.title,
+          sub: parsed[i] && typeof parsed[i].sub === 'string' ? parsed[i].sub : def.sub,
+          showTitle: parsed[i] && typeof parsed[i].showTitle === 'boolean' ? parsed[i].showTitle : true,
+          showSub: parsed[i] && typeof parsed[i].showSub === 'boolean' ? parsed[i].showSub : true
+        }));
+      }
+    }
+  } catch (err) {
+    console.warn('Welcome photos load error:', err);
+  }
+}
+
+function applyWelcomePhotos() {
+  welcomePhotos.forEach((item, i) => {
+    const imgEl = document.getElementById('heroImg' + i);
+    const titleEl = document.getElementById('heroCapTitle' + i);
+    const subEl = document.getElementById('heroCapSub' + i);
+    const capWrap = titleEl ? titleEl.closest('.hero-card-caption') : null;
+    if (imgEl && item.img) {
+      imgEl.src = item.img;
+      imgEl.alt = item.title || 'Lush Ceylon Showcase';
+    }
+    const visTitle = item.showTitle !== false && Boolean(item.title && item.title.trim());
+    const visSub = item.showSub !== false && Boolean(item.sub && item.sub.trim());
+    if (titleEl) {
+      titleEl.textContent = item.title || '';
+      titleEl.style.display = visTitle ? '' : 'none';
+    }
+    if (subEl) {
+      subEl.textContent = item.sub || '';
+      subEl.style.display = visSub ? '' : 'none';
+    }
+    if (capWrap) {
+      capWrap.style.display = (visTitle || visSub) ? '' : 'none';
+    }
+  });
+}
+
+// Sync live across tabs when Admin uploads/edits products or welcome photos in another tab
 window.addEventListener('storage', (e) => {
   if (e.key === STORAGE_KEY) {
     loadProductsFromBackend();
@@ -1438,6 +2601,11 @@ window.addEventListener('storage', (e) => {
     renderInvTable();
     const metricEl = document.getElementById('prodCountMetric');
     if (metricEl) metricEl.textContent = products.length + ' Items';
+    refreshCatalogViews();
+  } else if (e.key === WELCOME_PHOTOS_KEY) {
+    loadWelcomePhotos();
+    applyWelcomePhotos();
+    renderWelcomeAdminCards();
   }
 });
 
@@ -1458,6 +2626,10 @@ let orders = [
 
 // ── INIT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  applyShopSettings();
+  loadWelcomePhotos();
+  applyWelcomePhotos();
+  renderWelcomeAdminCards();
   loadProductsFromBackend();
   renderProducts('all');
   renderInvTable();
@@ -1475,6 +2647,7 @@ function switchCurrency(v) {
   currency = v;
   renderProducts(currentCat);
   refreshTotals();
+  refreshCatalogViews();
 }
 
 // ── PRODUCTS ──────────────────────────────────────────────
@@ -1508,44 +2681,61 @@ function renderProducts(cat) {
     grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;grid-column:1/-1;padding:40px">No products found in this category.</p>';
     return;
   }
-  const catLabels = { cosmetics:'Cosmetics', perfume:'Perfume', jewelry:'Gold Jewellery', gifts:'Gifts & Bears', valentine:"Valentine's", birthday:'Birthday', chocolate:'Chocolates', makeup:'Makeup Tools', accessories:'Hair & Accessories', wallet:'Wallets' };
-  list.forEach(p => {
-    const normCat = normalizeCategory(p.cat || p.category);
-    const imgSrc = p.img || p.image || './images/ceylon_botanical_elixir.jpg';
-    const priceLkr = typeof p.lkr === 'number' ? p.lkr : parseInt(String(p.price || '0').replace(/[^0-9]/g, ''), 10) || 1500;
-    const descText = p.desc || p.description || '';
-    const el = document.createElement('div');
-    el.className = 'prod-card';
-    el.innerHTML = `
-      <div class="prod-img-wrap">
-        <img src="${imgSrc}" alt="${p.title}" loading="lazy" onerror="this.onerror=null;this.src='./images/ceylon_botanical_elixir.jpg';">
-      </div>
-      <div class="prod-body">
-        <span class="prod-cat">${catLabels[normCat]||normCat}</span>
-        <h4 class="prod-title">${p.title}</h4>
-        <p class="prod-desc">${descText}</p>
-        <div class="prod-footer">
-          <div>
-            <span class="prod-price">${fmt(priceLkr)}</span>
-            <span class="prod-price-alt">${currency==='USD'?'Rs. '+priceLkr.toLocaleString():'$'+(priceLkr/RATE).toFixed(2)}</span>
-          </div>
-          <button class="btn btn-pink btn-sm" onclick="addToCart(${p.id})"><i class="fa fa-plus"></i> Add</button>
-        </div>
-      </div>`;
+  list.forEach((p, i) => {
+    const el = buildProductCard(p);
     grid.appendChild(el);
+    el.classList.add('reveal');
+    el.style.transitionDelay = (Math.min(i, 8) * 0.06) + 's';
+    if (typeof revealObserver !== 'undefined' && revealObserver) {
+      revealObserver.observe(el);
+    }
   });
 }
 
+// Shared product card (used by home grid + category/brand pages)
+function buildProductCard(p) {
+  const catLabels = { cosmetics:'Cosmetics', perfume:'Perfume', jewelry:'Gold Jewellery', gifts:'Gifts & Bears', valentine:"Valentine's", birthday:'Birthday', chocolate:'Chocolates', makeup:'Makeup Tools', accessories:'Hair & Accessories', wallet:'Wallets' };
+  const normCat = normalizeCategory(p.cat || p.category);
+  const imgSrc = p.img || p.image || './images/ceylon_botanical_elixir.jpg';
+  const priceLkr = typeof p.lkr === 'number' ? p.lkr : parseInt(String(p.price || '0').replace(/[^0-9]/g, ''), 10) || 1500;
+  const descText = p.desc || p.description || '';
+  const brand = getBrand(p);
+  const el = document.createElement('div');
+  el.className = 'prod-card';
+  el.innerHTML = `
+    <div class="prod-img-wrap">
+      <img src="${imgSrc}" alt="${p.title}" loading="lazy" onerror="this.onerror=null;this.src='./images/ceylon_botanical_elixir.jpg';">
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <a class="prod-cat" href="#category/${normCat}">${catLabels[normCat]||normCat}</a>
+        <a class="prod-brand" href="#brand/${slugify(brand)}"><i class="fa fa-tag"></i> ${escHtml(brand)}</a>
+      </div>
+      <h4 class="prod-title">${p.title}</h4>
+      <p class="prod-desc">${descText}</p>
+      <div class="prod-footer">
+        <div>
+          <span class="prod-price">${fmt(priceLkr)}</span>
+          <span class="prod-price-alt">${currency==='USD'?'Rs. '+priceLkr.toLocaleString():'$'+(priceLkr/RATE).toFixed(2)}</span>
+        </div>
+        <button class="btn btn-pink btn-sm" onclick="addToCart(${p.id})"><i class="fa fa-plus"></i> Add</button>
+      </div>
+    </div>`;
+  return el;
+}
+
 function filterCat(cat, el) {
-  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
+  document.querySelectorAll('.cat-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.cat ? p.dataset.cat === cat : p === el);
+  });
   renderProducts(cat);
+  if (typeof parseRoute === 'function' && parseRoute().page !== 'products') {
+    location.hash = '#products';
+  }
 }
 
 function scrollToProducts(cat) {
-  const el = document.querySelector('.cat-pill[onclick*="' + cat + '"]');
-  if (el) filterCat(cat, el);
-  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+  filterCat(cat);
 }
 
 // â”€â”€ CART â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -1554,6 +2744,20 @@ function addToCart(id) {
   const ex = cart.find(x => x.id === id);
   if (ex) ex.qty++; else cart.push({ ...p, qty: 1 });
   updateCartCount();
+  const cartBtn = document.querySelector('.cart-icon-btn');
+  const cartBadge = document.getElementById('cartCnt');
+  if (cartBtn) {
+    cartBtn.classList.remove('cart-bounce');
+    void cartBtn.offsetWidth;
+    cartBtn.classList.add('cart-bounce');
+    cartBtn.addEventListener('animationend', () => cartBtn.classList.remove('cart-bounce'), { once: true });
+  }
+  if (cartBadge) {
+    cartBadge.classList.remove('badge-pop');
+    void cartBadge.offsetWidth;
+    cartBadge.classList.add('badge-pop');
+    cartBadge.addEventListener('animationend', () => cartBadge.classList.remove('badge-pop'), { once: true });
+  }
   toggleCart(true);
 }
 
@@ -1653,9 +2857,148 @@ function exitAdmin() {
 
 function switchTab(name, el) {
   document.querySelectorAll('.a-tab').forEach(b => b.classList.remove('active')); el.classList.add('active');
-  ['overview','inventory','orders','gateway'].forEach(t => {
-    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
+  ['overview','inventory','welcome','orders','gateway'].forEach(t => {
+    const tabEl = document.getElementById('tab-' + t);
+    if (tabEl) tabEl.style.display = t === name ? 'block' : 'none';
   });
+  if (name === 'welcome') renderWelcomeAdminCards();
+}
+
+function renderWelcomeAdminCards() {
+  const wrap = document.getElementById('welcomePhotosAdminGrid');
+  if (!wrap) return;
+  wrap.innerHTML = welcomePhotos.map((item, idx) => {
+    const urlValue = (item.img && !item.img.startsWith('data:')) ? item.img : '';
+    const showT = item.showTitle !== false;
+    const showS = item.showSub !== false;
+    return `
+      <div style="background:var(--bg-dark);padding:18px;border-radius:12px;border:1px solid var(--border);display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <h5 style="font-family:var(--font-h);color:#145A38;font-size:16px;margin:0">${item.slotLabel}</h5>
+          <span class="badge badge-gold">Slot #${idx + 1}</span>
+        </div>
+        <div style="position:relative;border-radius:10px;overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(20,60,40,0.1);aspect-ratio:4/3;background:#E2F2E8;">
+          <img id="welcomeAdminPrev${idx}" src="${item.img}" alt="${item.slotLabel}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.onerror=null;this.src='./images/ceylon_botanical_elixir.jpg';">
+        </div>
+        <div class="field">
+          <label style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px">Upload Photo (Computer / Phone)</label>
+          <input type="file" accept="image/*" onchange="handleWelcomeFileUpload(${idx}, this)" style="width:100%;padding:7px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:12px;">
+        </div>
+        <div class="field">
+          <label style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px">Or Image Path / URL</label>
+          <input type="text" id="welcomeUrlIn${idx}" value="${urlValue}" placeholder="./images/ceylon_glow_serum.jpg" oninput="handleWelcomeUrlChange(${idx}, this.value)" style="width:100%;padding:8px 10px;background:#fff;border:1px solid var(--border);color:var(--text-main);border-radius:6px;font-size:12px;">
+        </div>
+        <div class="field">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <label for="welcomeTitleIn${idx}" style="font-size:11px;font-weight:700;color:var(--text-muted);margin:0">Caption Title</label>
+            <label style="font-size:11px;font-weight:600;color:#145A38;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
+              <input type="checkbox" id="welcomeShowTitle${idx}" ${showT ? 'checked' : ''} onchange="toggleWelcomeCaptionOpt(${idx})" style="accent-color:#1E7E4E;cursor:pointer;">
+              Show Title
+            </label>
+          </div>
+          <input type="text" id="welcomeTitleIn${idx}" value="${item.title.replace(/"/g, '&quot;')}" oninput="welcomePhotos[${idx}].title = this.value" ${showT ? '' : 'disabled'} style="width:100%;padding:8px 10px;background:${showT ? '#fff' : '#EDF4F0'};opacity:${showT ? '1' : '0.6'};border:1px solid var(--border);color:var(--text-main);border-radius:6px;font-size:13px;">
+        </div>
+        <div class="field">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <label for="welcomeSubIn${idx}" style="font-size:11px;font-weight:700;color:var(--text-muted);margin:0">Caption Badge</label>
+            <label style="font-size:11px;font-weight:600;color:#145A38;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
+              <input type="checkbox" id="welcomeShowSub${idx}" ${showS ? 'checked' : ''} onchange="toggleWelcomeCaptionOpt(${idx})" style="accent-color:#1E7E4E;cursor:pointer;">
+              Show Badge
+            </label>
+          </div>
+          <input type="text" id="welcomeSubIn${idx}" value="${item.sub.replace(/"/g, '&quot;')}" oninput="welcomePhotos[${idx}].sub = this.value" ${showS ? '' : 'disabled'} style="width:100%;padding:8px 10px;background:${showS ? '#fff' : '#EDF4F0'};opacity:${showS ? '1' : '0.6'};border:1px solid var(--border);color:var(--text-main);border-radius:6px;font-size:12px;">
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleWelcomeCaptionOpt(idx) {
+  const showT = document.getElementById('welcomeShowTitle' + idx);
+  const showS = document.getElementById('welcomeShowSub' + idx);
+  const tIn = document.getElementById('welcomeTitleIn' + idx);
+  const sIn = document.getElementById('welcomeSubIn' + idx);
+  if (showT) {
+    welcomePhotos[idx].showTitle = showT.checked;
+    if (tIn) {
+      tIn.disabled = !showT.checked;
+      tIn.style.background = showT.checked ? '#fff' : '#EDF4F0';
+      tIn.style.opacity = showT.checked ? '1' : '0.6';
+    }
+  }
+  if (showS) {
+    welcomePhotos[idx].showSub = showS.checked;
+    if (sIn) {
+      sIn.disabled = !showS.checked;
+      sIn.style.background = showS.checked ? '#fff' : '#EDF4F0';
+      sIn.style.opacity = showS.checked ? '1' : '0.6';
+    }
+  }
+}
+
+function handleWelcomeFileUpload(idx, input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const img = new Image();
+    img.onload = function() {
+      const maxDim = 800;
+      let w = img.width, h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+        else { w = Math.round(w * (maxDim / h)); h = maxDim; }
+      }
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      const dataUrl = c.toDataURL('image/jpeg', 0.84);
+      welcomePhotos[idx].img = dataUrl;
+      const prev = document.getElementById('welcomeAdminPrev' + idx);
+      if (prev) prev.src = dataUrl;
+      const urlIn = document.getElementById('welcomeUrlIn' + idx);
+      if (urlIn) urlIn.value = '';
+    };
+    img.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleWelcomeUrlChange(idx, val) {
+  const trimmed = (val || '').trim();
+  if (!trimmed) return;
+  welcomePhotos[idx].img = trimmed;
+  const prev = document.getElementById('welcomeAdminPrev' + idx);
+  if (prev) prev.src = trimmed;
+}
+
+function saveWelcomePhotos() {
+  welcomePhotos.forEach((item, idx) => {
+    const tIn = document.getElementById('welcomeTitleIn' + idx);
+    const sIn = document.getElementById('welcomeSubIn' + idx);
+    const uIn = document.getElementById('welcomeUrlIn' + idx);
+    const showT = document.getElementById('welcomeShowTitle' + idx);
+    const showS = document.getElementById('welcomeShowSub' + idx);
+    if (tIn) item.title = tIn.value.trim();
+    if (sIn) item.sub = sIn.value.trim();
+    if (showT) item.showTitle = showT.checked;
+    if (showS) item.showSub = showS.checked;
+    if (uIn && uIn.value.trim()) item.img = uIn.value.trim();
+  });
+  try {
+    localStorage.setItem(WELCOME_PHOTOS_KEY, JSON.stringify(welcomePhotos));
+  } catch (err) {
+    console.warn('Welcome photos save error:', err);
+  }
+  applyWelcomePhotos();
+  alert('✅ Welcome screen photos updated!');
+}
+
+function resetWelcomePhotos() {
+  if (!confirm('Reset the 3 Welcome screen photos back to the original defaults?')) return;
+  localStorage.removeItem(WELCOME_PHOTOS_KEY);
+  welcomePhotos = DEFAULT_WELCOME_PHOTOS.map(item => ({ ...item }));
+  applyWelcomePhotos();
+  renderWelcomeAdminCards();
 }
 
 function renderInvTable() {
@@ -1669,7 +3012,7 @@ function renderInvTable() {
     return `
     <tr>
       <td><img src="${imgSrc}" alt="${p.title}" onerror="this.onerror=null;this.src='./images/ceylon_botanical_elixir.jpg';"></td>
-      <td><strong>${p.title}</strong></td>
+      <td><strong>${p.title}</strong><br><small style="color:var(--text-muted)"><i class="fa fa-tag"></i> ${escHtml(getBrand(p))}</small></td>
       <td><span class="badge badge-gold">${catLabels[normCat]||normCat}</span></td>
       <td>Rs. ${priceLkr.toLocaleString()}</td>
       <td><span class="badge badge-green">In Stock</span></td>
@@ -1765,6 +3108,9 @@ function addProductPrompt() {
   document.getElementById('pFileInput').value = '';
   document.getElementById('pImgInput').value = '';
   document.getElementById('pDescInput').value = '';
+  document.getElementById('pBrandInput').value = '';
+  document.getElementById('pBrandInput').placeholder = 'e.g. Garnier (leave empty to auto-detect)';
+  fillBrandDatalist();
   document.getElementById('pImgPreviewWrap').style.display = 'none';
   document.getElementById('adminProductModal').style.display = 'flex';
 }
@@ -1782,6 +3128,10 @@ function editProdPrice(id) {
   const existingImg = p.img || p.image || '';
   document.getElementById('pImgInput').value = existingImg.startsWith('data:') ? '' : existingImg;
   document.getElementById('pDescInput').value = p.desc || p.description || '';
+  const brandIn = document.getElementById('pBrandInput');
+  brandIn.value = p.brand || '';
+  brandIn.placeholder = 'Auto-detected: ' + getBrand(p);
+  fillBrandDatalist();
   const prev = document.getElementById('pImgPreview');
   const wrap = document.getElementById('pImgPreviewWrap');
   if (existingImg) {
@@ -1801,6 +3151,7 @@ function saveProductModal(e) {
   const lkr = parseInt(document.getElementById('pPriceInput').value, 10) || 1500;
   const urlInput = document.getElementById('pImgInput').value.trim();
   const desc = document.getElementById('pDescInput').value.trim() || 'Available at Lush Ceylon.';
+  const brand = (document.getElementById('pBrandInput').value || '').trim();
 
   if (editId) {
     const p = products.find(x => String(x.id) === String(editId));
@@ -1809,6 +3160,7 @@ function saveProductModal(e) {
       p.cat = cat;
       p.lkr = lkr;
       p.desc = desc;
+      if (brand) p.brand = brand; else delete p.brand;
       if (uploadedImageDataUrl) p.img = uploadedImageDataUrl;
       else if (urlInput) p.img = urlInput;
     }
@@ -1821,20 +3173,20 @@ function saveProductModal(e) {
       cat: cat,
       lkr: lkr,
       img: imgFinal,
-      desc: desc
+      desc: desc,
+      ...(brand ? { brand } : {})
     });
   }
 
   saveProductsToBackend();
   renderInvTable();
   // Reset customer filter to 'all' so newly uploaded product is immediately visible in Customer View
-  const allPill = document.querySelector('.cat-pill');
-  if (allPill) {
-    document.querySelectorAll('.cat-pill').forEach(pill => pill.classList.remove('active'));
-    allPill.classList.add('active');
-  }
+  document.querySelectorAll('.cat-pill').forEach(pill => {
+    pill.classList.toggle('active', pill.dataset.cat === 'all');
+  });
   renderProducts('all');
   document.getElementById('prodCountMetric').textContent = products.length + ' Items';
+  refreshCatalogViews();
   closeProductModal();
 }
 
@@ -1846,6 +3198,7 @@ function deleteProd(id) {
     renderInvTable();
     renderProducts(currentCat);
     document.getElementById('prodCountMetric').textContent = products.length + ' Items';
+    refreshCatalogViews();
   }
 }
 
@@ -1871,7 +3224,7 @@ window.addEventListener('scroll', () => {
   }
 
   // Navbar glass on scroll
-  const nav = document.querySelector('nav') || document.querySelector('header');
+  const nav = document.querySelector('header');
   if (nav) {
     if (scrollTop > 60) nav.classList.add('nav-scrolled');
     else nav.classList.remove('nav-scrolled');
@@ -1882,13 +3235,20 @@ window.addEventListener('scroll', () => {
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      if (entry.target.dataset.stagger) {
-        const children = entry.target.querySelectorAll('.reveal-child');
+      const el = entry.target;
+      el.classList.add('visible');
+      if (el.classList.contains('prod-card')) {
+        const resetDelay = () => { el.style.transitionDelay = '0s'; };
+        el.addEventListener('transitionend', resetDelay, { once: true });
+        setTimeout(resetDelay, 850);
+      }
+      if (el.dataset.stagger) {
+        const children = el.querySelectorAll('.reveal-child');
         children.forEach((child, i) => {
           setTimeout(() => child.classList.add('visible'), i * 100);
         });
       }
+      revealObserver.unobserve(el);
     }
   });
 }, { threshold: 0.01, rootMargin: '0px 0px -10px 0px' });
@@ -1915,17 +3275,22 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   const hero = document.querySelector('.hero-sec, #home, section:first-of-type');
   if (!hero) return;
   const badge = hero.querySelector('.wind-ribbon-banner, .badge');
+  const label = hero.querySelector('.hero-label');
   const title = hero.querySelector('h1, .hero-title');
   const sub   = hero.querySelector('.hero-sub');
   const tags  = hero.querySelector('.hero-tags, .badge-row');
   const btns  = hero.querySelector('.hero-btns, .btn-row, .btn-group');
   const imgs  = hero.querySelectorAll('.hero-img-card');
   if (badge) badge.classList.add('hero-animate-badge');
+  if (label) label.classList.add('hero-animate-badge');
   if (title) title.classList.add('hero-animate-title');
   if (sub)   sub.classList.add('hero-animate-sub');
   if (tags)  tags.classList.add('hero-animate-tags');
   if (btns)  btns.classList.add('hero-animate-btns');
-  imgs.forEach(img => img.classList.add('hero-animate-img'));
+  imgs.forEach((img, i) => {
+    img.classList.add('hero-animate-img');
+    img.style.animationDelay = `0.5s, ${(1.5 + i * 0.8).toFixed(1)}s`;
+  });
 })();
 
 // 4. Add shimmer to the logo / store name
@@ -1933,11 +3298,15 @@ document.querySelectorAll('.logo, .brand-name, .nav-logo').forEach(el => {
   el.classList.add('shimmer-text');
 });
 
-// 5. Lush Greenish Nature & Light Wind Breeze Canvas (Floating Leaves + Soft Wind Streamlines)
+// 5. Lush Greenish Nature & Light Wind Breeze Canvas (Floating Leaves + Soft Wind Streamlines + Mouse Repulsion)
 (function() {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
   const canvas = document.createElement('canvas');
   canvas.id = 'nature-wind-canvas';
-  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.88;';
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.88;';
   document.body.appendChild(canvas);
   const ctx = canvas.getContext('2d');
   let W = canvas.width = window.innerWidth;
@@ -1953,12 +3322,25 @@ document.querySelectorAll('.logo, .brand-name, .nav-logo').forEach(el => {
   let mouseWindX = 0;
   let lastMouseX = null;
 
+  const mouse = {
+    x: null,
+    y: null,
+    radius: 120
+  };
+
   window.addEventListener('mousemove', (e) => {
+    mouse.x = e.x;
+    mouse.y = e.y;
     if (lastMouseX !== null) {
       const delta = (e.clientX - lastMouseX) * 0.015;
       mouseWindX = Math.max(-1.5, Math.min(1.5, mouseWindX + delta));
     }
     lastMouseX = e.clientX;
+  }, { passive: true });
+
+  window.addEventListener('mouseout', () => {
+    mouse.x = null;
+    mouse.y = null;
   }, { passive: true });
 
   const leafColors = [
@@ -1970,8 +3352,9 @@ document.querySelectorAll('.logo, .brand-name, .nav-logo').forEach(el => {
     '#B7E4C7'  // Delicate young leaf
   ];
 
-  // Create floating botanical leaves carried by light wind
-  const leafCount = 32;
+  // Create floating botanical leaves carried by light wind (fewer on narrow screens < 600px)
+  const isNarrowScreen = window.innerWidth < 600;
+  const leafCount = isNarrowScreen ? 12 : 32;
   const leaves = Array.from({ length: leafCount }, (_, idx) => ({
     x: Math.random() * W,
     y: Math.random() * H,
@@ -1990,7 +3373,8 @@ document.querySelectorAll('.logo, .brand-name, .nav-logo').forEach(el => {
   }));
 
   // Create soft, translucent wind breeze ribbons that drift across the screen
-  const windStreaks = Array.from({ length: 6 }, () => ({
+  const streakCount = isNarrowScreen ? 3 : 6;
+  const windStreaks = Array.from({ length: streakCount }, () => ({
     x: Math.random() * W,
     y: Math.random() * H * 0.85 + H * 0.05,
     length: Math.random() * 220 + 160,
@@ -2049,7 +3433,14 @@ document.querySelectorAll('.logo, .brand-name, .nav-logo').forEach(el => {
     ctx.restore();
   }
 
+  let rafId = null;
+
   function animateNatureWind() {
+    if (document.visibilityState === 'hidden') {
+      rafId = null;
+      return;
+    }
+
     ctx.clearRect(0, 0, W, H);
     time += 1;
 
@@ -2082,6 +3473,19 @@ document.querySelectorAll('.logo, .brand-name, .nav-logo').forEach(el => {
 
       leaf.x += gustX;
       leaf.y += gustY;
+
+      // Mouse interaction physics (repel force)
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = leaf.x - mouse.x;
+        const dy = leaf.y - mouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < mouse.radius && distance > 0.001) {
+          const force = (mouse.radius - distance) / mouse.radius;
+          leaf.x += (dx / distance) * force * 3;
+          leaf.y += (dy / distance) * force * 3;
+        }
+      }
+
       leaf.angle += leaf.spinSpeed + 0.004 * Math.sin(time * 0.02 + leaf.phase);
       leaf.flip += leaf.flipSpeed;
 
@@ -2100,10 +3504,19 @@ document.querySelectorAll('.logo, .brand-name, .nav-logo').forEach(el => {
       }
     });
 
-    requestAnimationFrame(animateNatureWind);
+    rafId = requestAnimationFrame(animateNatureWind);
   }
 
-  animateNatureWind();
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && rafId === null) {
+      rafId = requestAnimationFrame(animateNatureWind);
+    } else if (document.visibilityState === 'hidden' && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  });
+
+  rafId = requestAnimationFrame(animateNatureWind);
 })();
 
 // 6. Add section title accent line to all section headers
@@ -2114,6 +3527,921 @@ document.querySelectorAll('.sec-title').forEach(el => {
     el.appendChild(accent);
   }
 });
+
+// ═══════════════ CATALOG PAGES: CATEGORIES & BRANDS (hash routing) ═══════════════
+// Routes:  #categories | #category/<key> | #category/<key>/brand/<slug>
+//          #brands     | #brand/<slug>   | #brand/<slug>/category/<key>
+const CATEGORY_META = [
+  { key:'cosmetics',   label:'Cosmetics & Skincare',  icon:'fa-pump-soap',      img:'./images/ceylon_glow_serum.jpg',        blurb:'Serums, creams, cleansers, body & hair care' },
+  { key:'perfume',     label:'Perfumes & Sprays',     icon:'fa-bottle-droplet', img:'./images/perfume_collection.jpg',       blurb:'Eau de parfum, eau de toilette & body mists' },
+  { key:'jewelry',     label:'Gold-Plated Jewellery', icon:'fa-gem',            img:'./images/ceylon_emerald_earrings.jpg',  blurb:'Chains, pendants, bangles & earrings' },
+  { key:'gifts',       label:'Teddy Bears & Gifts',   icon:'fa-gift',           img:'./images/stitch_plush.webp',            blurb:'Plush toys, plush bags, bundles & keepsakes' },
+  { key:'valentine',   label:"Valentine's & Lovers",  icon:'fa-heart',          img:'./images/valentines_gift_set.jpg',      blurb:'Roses, frames, figurines & love decor' },
+  { key:'birthday',    label:'Birthday Party',        icon:'fa-cake-candles',   img:'./images/birthday_party_items.jpg',     blurb:'Decorations, hampers & party packs' },
+  { key:'chocolate',   label:'Chocolates',            icon:'fa-cookie-bite',    img:'./images/chocolates_collection.jpg',    blurb:'Imported chocolate bars & gift boxes' },
+  { key:'makeup',      label:'Makeup Tools',          icon:'fa-brush',          img:'./images/makeup_brushes_set.jpg',       blurb:'Brushes, liners & beauty tools' },
+  { key:'accessories', label:'Hair & Accessories',    icon:'fa-scissors',       img:'./images/hair_accessories_wallets.jpg', blurb:'Hair brushes, claw clips & pins' },
+  { key:'wallet',      label:'Wallets & Bags',        icon:'fa-wallet',         img:'./images/hair_accessories_wallets.jpg', blurb:'Leather wallets & everyday bags' }
+];
+
+// Brand is taken from product.brand (set in Admin) or auto-detected from the product name.
+const BRAND_RULES = [
+  [/^bio\s?aqua/i, 'BioAqua'], [/^bio glow/i, 'Bio Glow'], [/^jovees/i, 'Jovees'], [/^dr\.?\s*rashel/i, 'Dr. Rashel'],
+  [/^garnier/i, 'Garnier'], [/^yc\b/i, 'YC'], [/^viana/i, 'Viana'], [/^la fresh/i, 'La Fresh'], [/^vatika/i, 'Vatika'],
+  [/^carotone/i, 'Carotone'], [/^tresemm/i, 'TRESemmé'], [/^xhc/i, 'XHC'], [/^st\.?\s*ives/i, 'St. Ives'],
+  [/^dove\b/i, 'Dove'], [/^vaseline/i, 'Vaseline'], [/^regazza/i, 'Regazza'], [/^cadbury/i, 'Cadbury'],
+  [/^toblerone/i, 'Toblerone'], [/^the elf\b/i, 'The Elf'], [/my melody/i, 'Sanrio'],
+  [/\bstitch\b/i, 'Disney'], [/winnie the pooh/i, 'Disney']
+];
+const DEFAULT_BRAND = 'Lush Exclusive';
+
+function getBrand(p) {
+  if (p && p.brand && String(p.brand).trim()) return String(p.brand).trim();
+  const t = String((p && p.title) || '');
+  for (const [re, name] of BRAND_RULES) if (re.test(t)) return name;
+  return DEFAULT_BRAND;
+}
+function slugify(s) {
+  return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+function escHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+function prodCat(p) { return normalizeCategory(p.cat || p.category); }
+function catMeta(key) { return CATEGORY_META.find(c => c.key === key); }
+function productPrice(p) {
+  return typeof p.lkr === 'number' ? p.lkr : (parseInt(String(p.price || '0').replace(/[^0-9]/g, ''), 10) || 0);
+}
+// Unique brands (with product counts) sorted alphabetically
+function brandIndex(list) {
+  const map = new Map();
+  (list || products).forEach(p => {
+    const name = getBrand(p), slug = slugify(name);
+    if (!map.has(slug)) map.set(slug, { name, slug, count: 0 });
+    map.get(slug).count++;
+  });
+  return [...map.values()].sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+}
+function brandLetter(name) {
+  const ch = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').charAt(0).toUpperCase();
+  return /[A-Z]/.test(ch) ? ch : '#';
+}
+function brandInitials(name) {
+  const w = name.replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean);
+  return (w.length > 1 ? w[0][0] + w[1][0] : (w[0] || '?').slice(0, 2)).toUpperCase();
+}
+
+let catalogSort = 'featured';
+function sortList(list) {
+  const l = [...list];
+  if (catalogSort === 'price-asc') l.sort((a, b) => productPrice(a) - productPrice(b));
+  else if (catalogSort === 'price-desc') l.sort((a, b) => productPrice(b) - productPrice(a));
+  else if (catalogSort === 'name') l.sort((a, b) => String(a.title).localeCompare(String(b.title)));
+  return l;
+}
+function setCatalogSort(v) { catalogSort = v; router(true); }
+
+function fillGrid(gridEl, list) {
+  if (!gridEl) return;
+  gridEl.innerHTML = '';
+  if (!list.length) {
+    gridEl.innerHTML = '<p class="empty-note"><i class="fa fa-box-open"></i> No products here yet — check back soon!</p>';
+    return;
+  }
+  list.forEach(p => gridEl.appendChild(buildProductCard(p)));
+}
+
+function crumbsHTML(items) {
+  return '<nav class="crumbs" aria-label="Breadcrumb">' + items.map((it, i) =>
+    i < items.length - 1
+      ? `<a href="${it.href}">${escHtml(it.label)}</a><i class="fa fa-chevron-right"></i>`
+      : `<span>${escHtml(it.label)}</span>`
+  ).join('') + '</nav>';
+}
+function toolbarHTML(count) {
+  const opts = [['featured','Featured'], ['price-asc','Price: Low to High'], ['price-desc','Price: High to Low'], ['name','Name: A – Z']];
+  return `<div class="page-toolbar">
+    <span class="result-count"><strong>${count}</strong> product${count === 1 ? '' : 's'}</span>
+    <label class="sort-wrap"><i class="fa fa-arrow-down-wide-short"></i>
+      <select class="sort-sel" onchange="setCatalogSort(this.value)" aria-label="Sort products">
+        ${opts.map(([v, l]) => `<option value="${v}"${catalogSort === v ? ' selected' : ''}>${l}</option>`).join('')}
+      </select>
+    </label>
+  </div>`;
+}
+function notFoundHTML(msg, href, label) {
+  return `<div class="empty-page"><i class="fa fa-box-open"></i><h3>${escHtml(msg)}</h3>
+    <a class="btn btn-pink" href="${href}">${escHtml(label)}</a></div>`;
+}
+
+// ── Page: all categories ──
+function renderCategoriesPage(inner) {
+  const counts = {};
+  products.forEach(p => { const c = prodCat(p); counts[c] = (counts[c] || 0) + 1; });
+  inner.innerHTML = crumbsHTML([{ label:'Home', href:'#home' }, { label:'Categories' }]) + `
+    <div class="page-hero">
+      <span class="badge badge-gold"><i class="fa fa-th-large"></i> Shop by Category</span>
+      <h2>Product Categories</h2>
+      <p>Pick a category to see every product in it — then narrow it down by brand.</p>
+    </div>
+    <div class="cat-grid">
+      ${CATEGORY_META.map(c => `
+        <a class="cat-card" href="#category/${c.key}">
+          <img src="${c.img}" alt="${escHtml(c.label)}" loading="lazy">
+          <div class="cat-card-info">
+            <i class="fa ${c.icon}"></i>
+            <h3>${escHtml(c.label)}</h3>
+            <span>${counts[c.key] || 0} product${counts[c.key] === 1 ? '' : 's'} · ${escHtml(c.blurb)}</span>
+          </div>
+          <span class="cat-card-go"><i class="fa fa-arrow-right"></i></span>
+        </a>`).join('')}
+    </div>
+    <div class="brand-cta">
+      <div><h3>Looking for a specific brand?</h3><p>Browse all ${brandIndex().length} brands in alphabetical order.</p></div>
+      <a class="btn btn-gold" href="#brands"><i class="fa fa-arrow-down-a-z"></i> Brands A – Z</a>
+    </div>`;
+}
+
+// ── Page: single category (with brand filter A–Z) ──
+function renderCategoryPage(inner, key, brandSlug) {
+  const meta = catMeta(key);
+  if (!meta) { inner.innerHTML = notFoundHTML('Category not found', '#categories', 'See all categories'); return; }
+  const inCat = products.filter(p => prodCat(p) === key);
+  const brands = brandIndex(inCat);
+  const activeBrand = brandSlug ? brands.find(b => b.slug === brandSlug) : null;
+  const list = sortList(activeBrand ? inCat.filter(p => slugify(getBrand(p)) === activeBrand.slug) : inCat);
+
+  inner.innerHTML = crumbsHTML([
+      { label:'Home', href:'#home' }, { label:'Categories', href:'#categories' },
+      ...(activeBrand ? [{ label: meta.label, href:'#category/' + key }, { label: activeBrand.name }] : [{ label: meta.label }])
+    ]) + `
+    <div class="page-hero cat-hero" style="--hero-img:url('${meta.img}')">
+      <span class="badge badge-pink"><i class="fa ${meta.icon}"></i> Category</span>
+      <h2>${escHtml(meta.label)}${activeBrand ? ` <small>· ${escHtml(activeBrand.name)}</small>` : ''}</h2>
+      <p>${escHtml(meta.blurb)} · ${inCat.length} product${inCat.length === 1 ? '' : 's'} from ${brands.length} brand${brands.length === 1 ? '' : 's'}</p>
+    </div>
+    <div class="chip-row scroll" aria-label="Switch category">
+      <span class="filter-lbl"><i class="fa fa-th-large"></i> Category:</span>
+      ${CATEGORY_META.map(c => `<a class="chip${c.key === key ? ' active' : ''}" href="#category/${c.key}"><i class="fa ${c.icon}"></i> ${escHtml(c.label)}</a>`).join('')}
+    </div>
+    <div class="chip-row" aria-label="Filter by brand">
+      <span class="filter-lbl"><i class="fa fa-tags"></i> Brand (A – Z):</span>
+      <a class="chip${!activeBrand ? ' active' : ''}" href="#category/${key}">All Brands <em>${inCat.length}</em></a>
+      ${brands.map(b => `<a class="chip${activeBrand && activeBrand.slug === b.slug ? ' active' : ''}" href="#category/${key}/brand/${b.slug}">${escHtml(b.name)} <em>${b.count}</em></a>`).join('')}
+    </div>
+    ${toolbarHTML(list.length)}
+    <div class="prods-grid" id="catalogGrid"></div>`;
+  fillGrid(document.getElementById('catalogGrid'), list);
+}
+
+// ── Page: brand directory A–Z ──
+function renderBrandsPage(inner) {
+  const brands = brandIndex();
+  const groups = {};
+  brands.forEach(b => { const L = brandLetter(b.name); (groups[L] = groups[L] || []).push(b); });
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  if (groups['#']) letters.unshift('#');
+  const groupKeys = Object.keys(groups).sort((a, b) => a === '#' ? -1 : b === '#' ? 1 : a.localeCompare(b));
+
+  inner.innerHTML = crumbsHTML([{ label:'Home', href:'#home' }, { label:'Brands A – Z' }]) + `
+    <div class="page-hero">
+      <span class="badge badge-gold"><i class="fa fa-arrow-down-a-z"></i> Brand Directory</span>
+      <h2>Shop by Brand</h2>
+      <p>${brands.length} brands sorted A – Z. Tap a brand to see all of its products.</p>
+    </div>
+    <div class="brand-search"><i class="fa fa-magnifying-glass"></i>
+      <input type="search" placeholder="Search brands…" oninput="filterBrandTiles(this.value)" aria-label="Search brands">
+    </div>
+    <div class="az-bar">
+      ${letters.map(L => groups[L]
+        ? `<button type="button" onclick="jumpToLetter('${L}')">${L}</button>`
+        : `<span aria-hidden="true">${L}</span>`).join('')}
+    </div>
+    <div id="brandGroups">
+      ${groupKeys.map(L => `
+        <div class="brand-group" id="brand-letter-${L === '#' ? 'num' : L}">
+          <h3 class="brand-letter">${L}</h3>
+          <div class="brand-list">
+            ${groups[L].map(b => `
+              <a class="brand-tile" href="#brand/${b.slug}" data-name="${escHtml(b.name.toLowerCase())}">
+                <span class="brand-mono">${escHtml(brandInitials(b.name))}</span>
+                <span class="brand-tile-txt"><strong>${escHtml(b.name)}</strong><small>${b.count} product${b.count === 1 ? '' : 's'}</small></span>
+                <i class="fa fa-chevron-right"></i>
+              </a>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>
+    <p class="empty-note" id="brandNoMatch" style="display:none"><i class="fa fa-magnifying-glass"></i> No brands match your search.</p>`;
+}
+function jumpToLetter(L) {
+  const el = document.getElementById('brand-letter-' + (L === '#' ? 'num' : L));
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function filterBrandTiles(q) {
+  const query = String(q || '').trim().toLowerCase();
+  let any = false;
+  document.querySelectorAll('#brandGroups .brand-group').forEach(g => {
+    let vis = 0;
+    g.querySelectorAll('.brand-tile').forEach(t => {
+      const show = !query || t.dataset.name.includes(query);
+      t.style.display = show ? '' : 'none';
+      if (show) vis++;
+    });
+    g.style.display = vis ? '' : 'none';
+    if (vis) any = true;
+  });
+  const nm = document.getElementById('brandNoMatch');
+  if (nm) nm.style.display = any ? 'none' : 'block';
+}
+
+// ── Page: single brand (with category filter) ──
+function renderBrandPage(inner, slug, catKey) {
+  const all = brandIndex();
+  const idx = all.findIndex(b => b.slug === slug);
+  if (idx < 0) { inner.innerHTML = notFoundHTML('Brand not found', '#brands', 'See all brands'); return; }
+  const brand = all[idx];
+  const prev = all[idx - 1], next = all[idx + 1];
+  const ofBrand = products.filter(p => slugify(getBrand(p)) === slug);
+  const cats = CATEGORY_META.map(c => ({ ...c, count: ofBrand.filter(p => prodCat(p) === c.key).length })).filter(c => c.count);
+  const activeCat = catKey && cats.find(c => c.key === catKey) ? catMeta(catKey) : null;
+  const list = sortList(activeCat ? ofBrand.filter(p => prodCat(p) === activeCat.key) : ofBrand);
+
+  inner.innerHTML = crumbsHTML([
+      { label:'Home', href:'#home' }, { label:'Brands A – Z', href:'#brands' },
+      ...(activeCat ? [{ label: brand.name, href:'#brand/' + slug }, { label: activeCat.label }] : [{ label: brand.name }])
+    ]) + `
+    <div class="brand-hero">
+      <span class="brand-mono lg">${escHtml(brandInitials(brand.name))}</span>
+      <div class="brand-hero-txt">
+        <span class="badge badge-gold"><i class="fa fa-tag"></i> Brand</span>
+        <h2>${escHtml(brand.name)}${activeCat ? ` <small>· ${escHtml(activeCat.label)}</small>` : ''}</h2>
+        <p>${ofBrand.length} product${ofBrand.length === 1 ? '' : 's'} · ${cats.map(c => escHtml(c.label)).join(', ')}</p>
+      </div>
+      <div class="brand-hero-nav">
+        ${prev ? `<a class="btn btn-outline btn-sm" href="#brand/${prev.slug}" title="Previous brand"><i class="fa fa-chevron-left"></i> ${escHtml(prev.name)}</a>` : ''}
+        ${next ? `<a class="btn btn-outline btn-sm" href="#brand/${next.slug}" title="Next brand">${escHtml(next.name)} <i class="fa fa-chevron-right"></i></a>` : ''}
+      </div>
+    </div>
+    <div class="chip-row" aria-label="Filter by category">
+      <span class="filter-lbl"><i class="fa fa-filter"></i> Category:</span>
+      <a class="chip${!activeCat ? ' active' : ''}" href="#brand/${slug}">All Categories <em>${ofBrand.length}</em></a>
+      ${cats.map(c => `<a class="chip${activeCat && activeCat.key === c.key ? ' active' : ''}" href="#brand/${slug}/category/${c.key}"><i class="fa ${c.icon}"></i> ${escHtml(c.label)} <em>${c.count}</em></a>`).join('')}
+    </div>
+    <div class="chip-row scroll" aria-label="Switch brand">
+      <span class="filter-lbl"><i class="fa fa-arrow-down-a-z"></i> Brands:</span>
+      ${all.map(b => `<a class="chip${b.slug === slug ? ' active' : ''}" href="#brand/${b.slug}">${escHtml(b.name)}</a>`).join('')}
+    </div>
+    ${toolbarHTML(list.length)}
+    <div class="prods-grid" id="catalogGrid"></div>`;
+  fillGrid(document.getElementById('catalogGrid'), list);
+}
+
+// ── Router ──
+function parseRoute() {
+  const raw = location.hash.replace(/^#\/?/, '');
+  let h = raw;
+  try { h = decodeURIComponent(raw); } catch (e) {}
+  const parts = h.split('/').filter(Boolean);
+  if (parts[0] === 'products' || parts[0] === 'collection' || parts[0] === 'shop') return { page:'products' };
+  if (parts[0] === 'categories') return { page:'categories' };
+  if (parts[0] === 'category' && parts[1]) return { page:'category', cat: parts[1], brand: parts[2] === 'brand' ? parts[3] : null };
+  if (parts[0] === 'brands') return { page:'brands' };
+  if (parts[0] === 'brand' && parts[1]) return { page:'brand', brand: parts[1], cat: parts[2] === 'category' ? parts[3] : null };
+  return { page:'home', anchor: parts[0] || null };
+}
+
+let lastPage = 'home';
+function router(keepScroll) {
+  const keep = keepScroll === true;
+  const r = parseRoute();
+  const home = document.getElementById('homePage');
+  const colPage = document.getElementById('collectionPage');
+  const page = document.getElementById('catalogPage');
+  const inner = document.getElementById('catalogInner');
+  if (!home || !page || !inner) return;
+
+  // Navigating while the admin dashboard is open returns to the store
+  const adminV = document.getElementById('adminView');
+  if (!keep && adminV && adminV.style.display === 'block') exitAdmin();
+
+  if (r.page === 'home') {
+    page.classList.remove('active');
+    if (colPage) colPage.classList.remove('active');
+    home.style.display = '';
+    if (!keep) {
+      const target = r.anchor && document.getElementById(r.anchor);
+      if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: lastPage === 'home' ? 'smooth' : 'auto' }));
+      else if (lastPage !== 'home') window.scrollTo(0, 0);
+    }
+    lastPage = 'home';
+    updateNavActive(r);
+    return;
+  }
+
+  home.style.display = 'none';
+
+  if (r.page === 'products') {
+    page.classList.remove('active');
+    if (colPage) {
+      if (!keep) {
+        colPage.classList.remove('active');
+        void colPage.offsetWidth;
+        window.scrollTo(0, 0);
+      }
+      colPage.classList.add('active');
+    }
+    renderProducts(currentCat);
+    lastPage = 'products';
+    updateNavActive(r);
+    return;
+  }
+
+  if (colPage) colPage.classList.remove('active');
+  if (r.page === 'categories') renderCategoriesPage(inner);
+  else if (r.page === 'category') renderCategoryPage(inner, r.cat, r.brand);
+  else if (r.page === 'brands') renderBrandsPage(inner);
+  else if (r.page === 'brand') renderBrandPage(inner, r.brand, r.cat);
+
+  if (!keep) {
+    page.classList.remove('active');
+    void page.offsetWidth; // restart entrance animation
+    window.scrollTo(0, 0);
+  }
+  page.classList.add('active');
+  lastPage = r.page;
+  updateNavActive(r);
+}
+
+function updateNavActive(r) {
+  const want = r.page === 'categories' || r.page === 'category' ? '#categories'
+             : r.page === 'brands' || r.page === 'brand' ? '#brands'
+             : r.page === 'products' ? '#products'
+             : '#' + (r.anchor || 'home');
+  document.querySelectorAll('nav a, .mobile-quick a').forEach(a => {
+    a.classList.toggle('nav-active', a.getAttribute('href') === want);
+  });
+}
+
+function buildNavMenu() {
+  const menu = document.getElementById('navCatMenu');
+  if (!menu) return;
+  const counts = {};
+  products.forEach(p => { const c = prodCat(p); counts[c] = (counts[c] || 0) + 1; });
+  menu.innerHTML = CATEGORY_META.map(c =>
+    `<a href="#category/${c.key}"><span><i class="fa ${c.icon}"></i> ${escHtml(c.label)}</span><em>${counts[c.key] || 0}</em></a>`
+  ).join('') + '<a class="dd-all" href="#categories">View all categories <i class="fa fa-arrow-right"></i></a>';
+}
+
+function fillBrandDatalist() {
+  const dl = document.getElementById('brandList');
+  if (dl) dl.innerHTML = brandIndex().map(b => `<option value="${escHtml(b.name)}">`).join('');
+}
+
+// Re-render nav counts + the open catalog page after products/currency change
+function refreshCatalogViews() {
+  buildNavMenu();
+  if (lastPage !== 'home') router(true);
+}
+
+window.addEventListener('hashchange', router);
+document.addEventListener('DOMContentLoaded', () => {
+  buildNavMenu();
+  router();
+});
+
+// ═══════════════ GIFT BOX OVERLAY (KEPT FOR OFFER REVEALS) ═══════════════
+let giftStage = 0; // 0 = wrapped/ready, 1 = opening, 2 = revealing, 3 = done
+let onOfferRevealedCallback = null;
+
+(function initGiftIntro() {
+  const intro = document.getElementById('giftIntro');
+  if (!intro) return;
+
+  // Populate diagonal side-view LUSH logo watermark pattern across the black wrapping paper
+  intro.querySelectorAll('.gi-wm-sheet').forEach(sheet => {
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < 64; i++) {
+      const tile = document.createElement('div');
+      tile.className = 'gi-wm-tile';
+      tile.innerHTML = '<img src="./images/lush_logo.jpg" alt="">';
+      frag.appendChild(tile);
+    }
+    sheet.appendChild(frag);
+  });
+
+  const sp = intro.querySelector('.gi-sparkles');
+  if (sp) {
+    for (let i = 0; i < 22; i++) {
+      const s = document.createElement('span');
+      s.textContent = '✦';
+      s.style.cssText = `left:${(Math.random() * 100).toFixed(1)}%;top:${(Math.random() * 100).toFixed(1)}%;` +
+        `font-size:${(8 + Math.random() * 14).toFixed(0)}px;animation-delay:${(Math.random() * 3).toFixed(2)}s;` +
+        `animation-duration:${(2 + Math.random() * 2.5).toFixed(2)}s`;
+      sp.appendChild(s);
+    }
+  }
+})();
+
+// Call showOfferReveal(titleText, onDone) anytime to display the gift-wrap reveal for a special offer
+function showOfferReveal(offerTitle, onDone) {
+  const intro = document.getElementById('giftIntro');
+  if (!intro) return;
+  giftStage = 0;
+  onOfferRevealedCallback = typeof onDone === 'function' ? onDone : null;
+  intro.classList.remove('untie', 'open', 'reveal');
+  const box = intro.querySelector('.gi-confetti');
+  if (box) box.innerHTML = '';
+  const welcomeEl = intro.querySelector('.gi-welcome');
+  if (welcomeEl && offerTitle) {
+    welcomeEl.textContent = offerTitle;
+  }
+  const hintEl = intro.querySelector('.gi-hint');
+  if (hintEl) {
+    hintEl.innerHTML = '<i class="fa fa-hand-pointer"></i> Click the LUSH ribbon seal to untie &amp; reveal your offer';
+  }
+  intro.classList.add('active');
+  document.body.classList.add('gift-lock');
+  try { intro.focus({ preventScroll: true }); } catch (e) {}
+}
+
+function giftKey(e) {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGift(); }
+  else if (e.key === 'Escape') skipGift(e);
+}
+
+function openGift() {
+  if (giftStage !== 0) return;
+  giftStage = 1;
+  const intro = document.getElementById('giftIntro');
+  if (!intro) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { revealSite(); return; }
+  intro.classList.add('untie');                    // sticker curls off, tails pull, bow loops slip through knot, ribbons slacken & slide
+  setTimeout(() => {                               // golden light burst + confetti as ribbons clear the center
+    intro.classList.add('open');
+    launchConfetti();
+  }, 1050);
+  setTimeout(revealSite, 1600);                    // black LUSH wrapping paper folds open → offer revealed
+}
+
+function skipGift(e) {
+  if (e) e.stopPropagation();
+  if (giftStage >= 2) return;
+  revealSite();
+}
+
+function revealSite() {
+  if (giftStage >= 2) return;
+  giftStage = 2;
+  const intro = document.getElementById('giftIntro');
+  if (intro) intro.classList.add('reveal');
+  document.body.classList.remove('gift-lock');
+  document.body.classList.add('gift-revealing');
+  if (onOfferRevealedCallback) {
+    try { onOfferRevealedCallback(); } catch (e) {}
+    onOfferRevealedCallback = null;
+  }
+  setTimeout(finishGift, 1350);
+}
+
+function finishGift() {
+  const intro = document.getElementById('giftIntro');
+  if (intro) {
+    intro.classList.remove('active', 'untie', 'open', 'reveal');
+    const box = intro.querySelector('.gi-confetti');
+    if (box) box.innerHTML = '';
+  }
+  document.body.classList.remove('gift-lock', 'gift-revealing');
+  giftStage = 0;
+}
+
+function launchConfetti() {
+  const box = document.querySelector('#giftIntro .gi-confetti');
+  if (!box) return;
+  const colors = ['#D4AF37', '#F7E7A1', '#FFFFFF', '#1E7E4E', '#52B788', '#B7E4C7', '#E9B8C4'];
+  for (let i = 0; i < 120; i++) {
+    const c = document.createElement('i');
+    const angle = (-Math.PI) * Math.random() - (Math.random() < 0.15 ? Math.PI * 0.2 : 0);
+    const dist = 22 + Math.random() * 42;
+    const x = Math.cos(angle) * dist;
+    const y = Math.sin(angle) * dist + 10 + Math.random() * 25;
+    const round = Math.random() < 0.3;
+    const w = round ? 7 + Math.random() * 5 : 5 + Math.random() * 5;
+    const h = round ? w : 10 + Math.random() * 10;
+    c.style.cssText = `--x:${x.toFixed(1)}vmin;--y:${y.toFixed(1)}vmin;--r:${(Math.random() * 900 - 450).toFixed(0)}deg;` +
+      `width:${w.toFixed(1)}px;height:${h.toFixed(1)}px;background:${colors[i % colors.length]};` +
+      `border-radius:${round ? '50%' : '2px'};animation-duration:${(1.3 + Math.random() * 1.1).toFixed(2)}s;` +
+      `animation-delay:${(Math.random() * 0.18).toFixed(2)}s`;
+    box.appendChild(c);
+  }
+}
+
+// ═══════════════ RIGHT-SIDE SCROLL-SPY HUD & C-PATH CHARACTER SCRUBBER ═══════════════
+(function initScrollSpyHud() {
+  const hud = document.getElementById('scrollSpyHud');
+  const ruler = document.getElementById('hudRuler');
+  const rulerMarker = document.getElementById('hudRulerMarker');
+  const pastStack = document.getElementById('hudPastStack');
+  const upcomingStack = document.getElementById('hudUpcomingStack');
+  const activeWrap = document.getElementById('hudActiveWrap');
+  const activeTitle = document.getElementById('hudActiveTitle');
+  const activeLineFill = document.getElementById('hudActiveLineFill');
+  const secIdxEl = document.getElementById('hudSecIdx');
+  const pctEl = document.getElementById('hudPct');
+  const scrubStage = document.getElementById('hudScrubStage');
+  const measureBox = document.getElementById('hudMeasureBox');
+  if (!hud || !ruler || !pastStack || !upcomingStack || !activeWrap || !activeTitle || !scrubStage || !measureBox) return;
+
+  const HUD_SECTIONS = [
+    { selector: '#home',      label: 'WELCOME' },
+    { selector: '.cat-strip', label: 'CATEGORIES' },
+    { selector: '#visit',     label: 'VISIT SHOP' },
+    { selector: '#gifts',     label: 'GIFT SETS' },
+    { selector: '#payments',  label: 'PAYMENTS' },
+    { selector: '#contact',   label: 'CONTACT' }
+  ];
+
+  // Build 65 tick marks along the right-edge ruler reaching the bottom of the page
+  const TICK_COUNT = 65;
+  const ticks = [];
+  const tickFrag = document.createDocumentFragment();
+  for (let i = 0; i < TICK_COUNT; i++) {
+    const t = document.createElement('span');
+    t.className = 'hud-tick' + (i % 4 === 0 ? ' major' : '');
+    tickFrag.appendChild(t);
+    ticks.push(t);
+  }
+  ruler.appendChild(tickFrag);
+
+  // Cache measured character X offsets (relative to HUD right alignment) for both 11px and 28px
+  let charMetricsCache = {};
+  function measureLabelChars(label) {
+    const isCompact = window.innerWidth <= 900;
+    const bigSize = isCompact ? 20 : 28;
+    const smallSize = isCompact ? 9.5 : 11;
+    const cacheKey = `${label}_${bigSize}_${smallSize}`;
+    if (charMetricsCache[cacheKey]) return charMetricsCache[cacheKey];
+
+    const measureAt = (fontSize, fontWeight, letterSpacing) => {
+      measureBox.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;white-space:pre;font-family:var(--font-b);font-size:${fontSize}px;font-weight:${fontWeight};letter-spacing:${letterSpacing}px;text-transform:uppercase;line-height:1;`;
+      measureBox.innerHTML = '';
+      const spans = [];
+      for (const ch of label) {
+        const s = document.createElement('span');
+        s.textContent = ch;
+        measureBox.appendChild(s);
+        spans.push(s);
+      }
+      const boxRect = measureBox.getBoundingClientRect();
+      const totalW = boxRect.width || 1;
+      const centersFromRight = spans.map(s => {
+        const r = s.getBoundingClientRect();
+        const centerFromLeft = (r.left - boxRect.left) + r.width * 0.5;
+        return totalW - centerFromLeft; // distance of char center from right edge of word
+      });
+      return { totalW, centersFromRight, fontSize };
+    };
+
+    const big = measureAt(bigSize, 800, 1);
+    const small = measureAt(smallSize, 600, isCompact ? 1.2 : 1.6);
+    const res = { big, small, scaleRatio: smallSize / bigSize };
+    charMetricsCache[cacheKey] = res;
+    return res;
+  }
+
+  window.addEventListener('resize', () => {
+    charMetricsCache = {};
+    requestHudTick();
+  }, { passive: true });
+
+  function scrollToSection(selector) {
+    const el = document.querySelector(selector);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  let currentActiveSelector = '#home';
+  activeWrap.addEventListener('click', () => scrollToSection(currentActiveSelector));
+
+  let lastRenderedKey = '';
+  let scrubCharEls = [];
+  let scrubCharLabel = '';
+  let activeCharEls = [];
+  let activeCharLabel = '';
+
+  function ensureActiveChars(label) {
+    if (activeCharLabel === label && activeCharEls.length === label.length) return;
+    activeCharLabel = label;
+    activeTitle.innerHTML = '';
+    activeCharEls = [];
+    const frag = document.createDocumentFragment();
+    for (const ch of label) {
+      const span = document.createElement('span');
+      span.style.cssText = 'display:inline-block;white-space:pre;will-change:transform,opacity;transform-origin:right center;';
+      span.textContent = ch;
+      frag.appendChild(span);
+      activeCharEls.push(span);
+    }
+    activeTitle.appendChild(frag);
+  }
+
+  function ensureScrubChars(label) {
+    if (scrubCharLabel === label && scrubCharEls.length === label.length) return;
+    scrubCharLabel = label;
+    scrubStage.innerHTML = '';
+    scrubCharEls = [];
+    const frag = document.createDocumentFragment();
+    for (const ch of label) {
+      const span = document.createElement('span');
+      span.className = 'hud-scrub-char';
+      span.textContent = ch;
+      frag.appendChild(span);
+      scrubCharEls.push(span);
+    }
+    scrubStage.appendChild(frag);
+  }
+
+  function clearScrubChars() {
+    if (scrubCharEls.length) {
+      scrubStage.innerHTML = '';
+      scrubCharEls = [];
+      scrubCharLabel = '';
+    }
+  }
+
+  // Smooth spring-damped scroll state for realistic 60fps physical inertia
+  let smoothScrollY = window.scrollY || window.pageYOffset || 0;
+  let scrollVelocity = 0;
+  let hudRafId = null;
+
+  function quinticEaseInOut(t) {
+    return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
+  }
+
+  function renderHudFrame() {
+    hudRafId = null;
+
+    // Hide HUD when Admin panel or non-home catalog page is active
+    const adminView = document.getElementById('adminView');
+    const homePage = document.getElementById('homePage');
+    if ((adminView && adminView.style.display === 'block') || (homePage && homePage.style.display === 'none')) {
+      hud.classList.add('hud-hidden');
+      return;
+    }
+    hud.classList.remove('hud-hidden');
+
+    const targetScrollY = window.scrollY || window.pageYOffset || 0;
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) {
+      smoothScrollY = targetScrollY;
+      scrollVelocity = 0;
+    } else {
+      const diff = targetScrollY - smoothScrollY;
+      scrollVelocity = scrollVelocity * 0.72 + diff * 0.16;
+      smoothScrollY += diff * 0.18;
+      if (Math.abs(diff) > 0.12 || Math.abs(scrollVelocity) > 0.08) {
+        hudRafId = requestAnimationFrame(renderHudFrame);
+      } else {
+        smoothScrollY = targetScrollY;
+        scrollVelocity = 0;
+      }
+    }
+
+    const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const rawPct = Math.max(0, Math.min(100, (smoothScrollY / docHeight) * 100));
+    const displayPct = Math.max(1, Math.min(99, Math.round(rawPct)));
+    pctEl.textContent = String(displayPct).padStart(2, '0') + '%';
+    rulerMarker.style.top = rawPct.toFixed(2) + '%';
+
+    // Realistic Gaussian proximity wave along the 65 glass ruler ticks
+    const floatTickPos = (rawPct / 100) * (TICK_COUNT - 1);
+    for (let i = 0; i < TICK_COUNT; i++) {
+      const isMajor = (i % 4 === 0);
+      const dist = i - floatTickPos;
+      const wave = Math.exp(-(dist * dist) / 10.5); // bell-curve proximity to active marker
+      const baseW = isMajor ? 9.5 : 4.5;
+      const w = baseW + wave * 7.5;
+      ticks[i].style.width = w.toFixed(1) + 'px';
+      ticks[i].classList.toggle('lit', i <= floatTickPos + 0.5);
+    }
+
+    // Gather active DOM elements & document offsets
+    const realScrollNow = window.scrollY || window.pageYOffset || 0;
+    const activeSecs = [];
+    for (const item of HUD_SECTIONS) {
+      const el = document.querySelector(item.selector);
+      if (el && el.offsetParent !== null) {
+        const rect = el.getBoundingClientRect();
+        activeSecs.push({
+          ...item,
+          top: rect.top + realScrollNow,
+          height: Math.max(80, rect.height)
+        });
+      }
+    }
+    if (!activeSecs.length) return;
+
+    // Reference focal line in viewport (driven by spring-smoothed scroll position)
+    const focalY = smoothScrollY + window.innerHeight * 0.35;
+    let activeIdx = 0;
+    for (let i = 0; i < activeSecs.length; i++) {
+      if (focalY >= activeSecs[i].top) activeIdx = i;
+      else break;
+    }
+
+    // Calculate progress within current section toward the next section
+    const curSec = activeSecs[activeIdx];
+    const nextSec = activeSecs[activeIdx + 1] || null;
+    let secProgress = 1;
+    if (nextSec) {
+      const span = Math.max(120, nextSec.top - curSec.top);
+      secProgress = Math.max(0, Math.min(1, (focalY - curSec.top) / span));
+    } else {
+      const span = Math.max(120, (smoothScrollY + docHeight) - curSec.top);
+      secProgress = Math.max(0, Math.min(1, (focalY - curSec.top) / span));
+    }
+
+    activeLineFill.style.width = (Math.max(4, secProgress * 100)).toFixed(1) + '%';
+    secIdxEl.textContent = `${String(activeIdx + 1).padStart(2, '0')} / ${String(activeSecs.length).padStart(2, '0')}`;
+    currentActiveSelector = curSec.selector;
+
+    // C-path scrubbing transition zone between activeIdx and activeIdx + 1
+    const TRANSITION_START = 0.42;
+    const isTransitioning = !prefersReduced && nextSec && secProgress > TRANSITION_START;
+    const scrubP = isTransitioning
+      ? Math.max(0, Math.min(1, (secProgress - TRANSITION_START) / (1 - TRANSITION_START)))
+      : 0;
+
+    // Rebuild past & upcoming stack DOM only when activeIdx or transition state changes
+    const stateKey = `${activeIdx}_${isTransitioning ? 1 : 0}_${activeSecs.length}`;
+    if (stateKey !== lastRenderedKey) {
+      lastRenderedKey = stateKey;
+      pastStack.innerHTML = '';
+      for (let i = 0; i < activeIdx; i++) {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'hud-stack-item';
+        itemEl.textContent = activeSecs[i].label;
+        const sel = activeSecs[i].selector;
+        itemEl.addEventListener('click', () => scrollToSection(sel));
+        pastStack.appendChild(itemEl);
+      }
+
+      upcomingStack.innerHTML = '';
+      for (let i = activeIdx + 1; i < activeSecs.length; i++) {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'hud-stack-item';
+        itemEl.textContent = activeSecs[i].label;
+        if (isTransitioning && i === activeIdx + 1) {
+          itemEl.style.visibility = 'hidden'; // characters are scrubbing live on C-path
+        }
+        const sel = activeSecs[i].selector;
+        itemEl.addEventListener('click', () => scrollToSection(sel));
+        upcomingStack.appendChild(itemEl);
+      }
+
+      ensureActiveChars(curSec.label);
+    }
+
+    const isCompact = window.innerWidth <= 900;
+    const hudHeight = hud.clientHeight || 500;
+    const hudWidth = hud.clientWidth || 248;
+    const rightAnchorX = hudWidth - 26;
+    const pastRowH = 19;
+    const pastHeight = activeIdx * pastRowH;
+    const activeBaseTop = 12 + pastHeight + (activeIdx > 0 ? 6 : 0);
+    const upcomingBotOffset = isCompact ? 66 : 84;
+
+    if (!isTransitioning) {
+      clearScrubChars();
+      activeWrap.style.top = activeBaseTop + 'px';
+      activeTitle.style.transform = 'none';
+      activeTitle.style.opacity = '1';
+      for (let i = 0; i < activeCharEls.length; i++) {
+        activeCharEls[i].style.transform = 'none';
+        activeCharEls[i].style.opacity = '1';
+      }
+      return;
+    }
+
+    // 1) Outgoing active title: character-by-character staggered peel-up & scale-down into the bottom of the top-right past stack
+    const metricsCur = measureLabelChars(curSec.label);
+    const M = activeCharEls.length;
+    const outGlobalEase = quinticEaseInOut(scrubP);
+    activeWrap.style.top = (activeBaseTop - outGlobalEase * 6) + 'px';
+    const outScale = 1 - outGlobalEase * (1 - metricsCur.scaleRatio);
+    activeTitle.style.transform = `scale(${outScale.toFixed(3)})`;
+    for (let i = 0; i < M; i++) {
+      const delay = M > 1 ? (i / (M - 1)) * 0.28 : 0;
+      const uOut = Math.max(0, Math.min(1, (scrubP - delay) / (1 - 0.28)));
+      const eOut = quinticEaseInOut(uOut);
+      const liftY = -eOut * 11;
+      const tiltX = eOut * 22;
+      activeCharEls[i].style.transform = `perspective(400px) translateY(${liftY.toFixed(1)}px) rotateX(${tiltX.toFixed(1)}deg)`;
+      activeCharEls[i].style.opacity = (1 - eOut * 0.38).toFixed(2);
+    }
+
+    // 2) Incoming nextSec.label: True C1-continuous arc-length parameterized C-spline along the right edge
+    const nextLabel = nextSec.label;
+    ensureScrubChars(nextLabel);
+    const metricsNext = measureLabelChars(nextLabel);
+    const N = nextLabel.length;
+
+    const upcomingCount = activeSecs.length - (activeIdx + 1);
+    const startY = hudHeight - upcomingBotOffset - (upcomingCount - 1) * pastRowH - metricsNext.small.fontSize * 0.5;
+    const targetActiveTop = 12 + (activeIdx + 1) * pastRowH + 6;
+    const endY = targetActiveTop + metricsNext.big.fontSize * 0.52;
+
+    const railX = hudWidth - 19; // Vertical track just inside the right-edge glass tick ruler
+    const rBot = Math.min(30, Math.max(16, (startY - endY) * 0.14));
+    const rTop = Math.min(36, Math.max(18, (startY - endY) * 0.17));
+
+    const botTurnStartX = railX - rBot;
+    const topTurnEndX = railX - rTop;
+    const botTurnCenterY = startY - rBot;
+    const topTurnCenterY = endY + rTop;
+
+    const arcBotLen = (Math.PI * 0.5) * rBot;
+    const vertLen = Math.max(20, botTurnCenterY - topTurnCenterY);
+    const arcTopLen = (Math.PI * 0.5) * rTop;
+
+    // Velocity-driven micro-stretch for physical realism
+    const speedFactor = Math.min(0.14, Math.abs(scrollVelocity) * 0.008);
+    const staggerSpan = 0.34;
+
+    for (let k = 0; k < N; k++) {
+      const charEl = scrubCharEls[k];
+      const charDelay = N > 1 ? (k / (N - 1)) * staggerSpan : 0;
+      const u = Math.max(0, Math.min(1, (scrubP - charDelay) / (1 - staggerSpan)));
+      const s = quinticEaseInOut(u);
+
+      const startX = Math.min(botTurnStartX, rightAnchorX - metricsNext.small.centersFromRight[k]);
+      const endX = Math.min(topTurnEndX, rightAnchorX - metricsNext.big.centersFromRight[k]);
+
+      // Exact piecewise arc lengths for character k's C-shaped trajectory
+      const lenIn = Math.max(0, botTurnStartX - startX);
+      const lenOut = Math.max(0, topTurnEndX - endX);
+      const totalArcLen = lenIn + arcBotLen + vertLen + arcTopLen + lenOut;
+      const d = s * totalArcLen;
+
+      let x, y, rotDeg, bankDeg = 0;
+      if (d <= lenIn) {
+        // Segment 1: Horizontal glide along bottom-right stack toward bottom-right curve
+        x = startX + d;
+        y = startY;
+        rotDeg = 0;
+      } else if (d <= lenIn + arcBotLen) {
+        // Segment 2: Smooth 90° circular arc at bottom-right corner (0° -> -90°)
+        const alpha = (d - lenIn) / rBot; // 0 .. PI/2
+        x = botTurnStartX + rBot * Math.sin(alpha);
+        y = botTurnCenterY + rBot * Math.cos(alpha);
+        rotDeg = -(alpha * 180) / Math.PI;
+        bankDeg = Math.sin(alpha * 2) * 14;
+      } else if (d <= lenIn + arcBotLen + vertLen) {
+        // Segment 3: Vertical ascent straight up the right viewport edge (-90°)
+        const v = d - (lenIn + arcBotLen);
+        x = railX;
+        y = botTurnCenterY - v;
+        rotDeg = -90;
+      } else if (d <= lenIn + arcBotLen + vertLen + arcTopLen) {
+        // Segment 4: Smooth 90° circular arc at top-right corner (-90° -> 0°)
+        const beta = (d - (lenIn + arcBotLen + vertLen)) / rTop; // 0 .. PI/2
+        x = topTurnEndX + rTop * Math.cos(beta);
+        y = topTurnCenterY - rTop * Math.sin(beta);
+        rotDeg = -90 + (beta * 180) / Math.PI;
+        bankDeg = -Math.sin(beta * 2) * 14;
+      } else {
+        // Segment 5: Horizontal glide into exact locked character slot in active header (0°)
+        const h = d - (lenIn + arcBotLen + vertLen + arcTopLen);
+        x = topTurnEndX - h;
+        y = endY;
+        rotDeg = 0;
+      }
+
+      // Scale smoothly from 11px to 28px with subtle mid-flight physical stretch
+      const midFlight = Math.sin(s * Math.PI);
+      const baseScale = metricsNext.scaleRatio + s * (1 - metricsNext.scaleRatio);
+      const scaleX = baseScale * (1 + midFlight * speedFactor);
+      const scaleY = baseScale * (1 - midFlight * speedFactor * 0.45);
+
+      charEl.style.opacity = (0.52 + s * 0.48).toFixed(2);
+      charEl.style.transform =
+        `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) translate(-50%, -50%) ` +
+        `perspective(420px) rotate(${rotDeg.toFixed(2)}deg) rotateX(${bankDeg.toFixed(1)}deg) ` +
+        `scale(${scaleX.toFixed(3)}, ${scaleY.toFixed(3)})`;
+    }
+  }
+
+  function requestHudTick() {
+    if (hudRafId === null) {
+      hudRafId = requestAnimationFrame(renderHudFrame);
+    }
+  }
+
+  window.addEventListener('scroll', requestHudTick, { passive: true });
+  window.addEventListener('hashchange', () => setTimeout(requestHudTick, 50));
+  document.addEventListener('DOMContentLoaded', () => setTimeout(requestHudTick, 60));
+  requestHudTick();
+})();
 </script>
 </body>
 </html>
